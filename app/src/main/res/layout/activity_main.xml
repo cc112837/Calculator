@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="火灾计算器"
+            android:text="消防计算器"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
