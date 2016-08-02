@@ -57,12 +57,15 @@
                     android:textColor="@color/gray"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/et_size"
+                    android:background="@null"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
-                    android:text="ft"
+                    android:inputType="number"
+                    android:hint="ft"
                     android:textColor="@color/gray"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -87,6 +90,7 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/tv_rate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -116,6 +120,7 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/tv_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -125,11 +130,7 @@
                     android:textSize="17sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_result"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -137,11 +138,12 @@
                     android:background="@color/line" />
 
                 <TextView
+                    android:id="@+id/tv_conclusion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="结果"
+                    android:text="计算结果"
                     android:textColor="@color/buttoncolor"
                     android:textSize="18sp" />
 
@@ -149,7 +151,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="5px"
                     android:background="@color/line" />
-
+            <LinearLayout
+                android:id="@+id/ll_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,12 +165,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="表面密度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_density"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -188,12 +195,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="表面积"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_surface"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -217,12 +225,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="整个表面的应用强度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_appli"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -246,12 +255,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="泡沫液的流动强度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_flowrate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -275,12 +285,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="泡沫液要求的容量"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_volume"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -304,12 +315,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="罐每英寸的高度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_inchhight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -333,12 +345,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
+                        android:layout_weight="3"
                         android:text="罐每英尺的高度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_footheight"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
