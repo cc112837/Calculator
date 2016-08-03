@@ -3,6 +3,7 @@ package com.cc.calculator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ public class WaterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water);
         Intent intent = getIntent();
-        String flag = intent.getStringExtra("flag");
+        final String flag = intent.getStringExtra("flag");
         init();
         if (flag.equals("imper")) {
             tv_press.setText("psi");
@@ -63,7 +64,7 @@ public class WaterActivity extends Activity {
                     length = tv_44.getText().toString();
                     press = tv_press.getText().toString();
                     height = tv_height.getText().toString();
-                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || press.length() <= 0 || s.length() <= 0) {
+                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || height.length() <= 0 || s.length() <= 0) {
                         Toast.makeText(WaterActivity.this, "请检查输入，输入不能为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
@@ -97,7 +98,7 @@ public class WaterActivity extends Activity {
                 @Override
                 public void onOptionsSelect(int options1, int option2, int options3) {
                     ss = optionsItems.get(options1);
-                    if ("304".equals(s)) {
+                    if ("304".equals(ss)) {
                         special12();
                     } else {
                         usual();
@@ -110,10 +111,10 @@ public class WaterActivity extends Activity {
                 public void onClick(View v) {
                     flowrate = tv_22.getText().toString();
                     number = tv_33.getText().toString();
-                    length = tv_44.getText().toString();
                     press = tv_press.getText().toString();
+                    length = tv_44.getText().toString();
                     height = tv_height.getText().toString();
-                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || press.length() <= 0 || ss.length() <= 0) {
+                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 ||height.length()<=0|| ss.length() <= 0) {
                         Toast.makeText(WaterActivity.this, "请检查输入，输入不能为空", Toast.LENGTH_LONG).show();
                     }
                     else{
