@@ -3,7 +3,6 @@ package com.cc.calculator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -32,7 +31,7 @@ public class WaterActivity extends Activity {
         Intent intent = getIntent();
         final String flag = intent.getStringExtra("flag");
         init();
-        if (flag.equals("imper")) {
+        if (flag.equals("imper")) {//英尺
             tv_press.setText("psi");
             tv_diameter.setText("″");
             tv_22.setHint("gpm");
@@ -40,7 +39,7 @@ public class WaterActivity extends Activity {
             tv_height.setHint("0ft");
             ftValue();
             pvOptions.setPicker(optionsItems);
-            pvOptions.setTitle("直径尺寸");
+            pvOptions.setTitle("水带直径");
             pvOptions.setCyclic(false);
             pvOptions.setSelectOptions(1);
             pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
@@ -64,7 +63,7 @@ public class WaterActivity extends Activity {
                     length = tv_44.getText().toString();
                     press = tv_press.getText().toString();
                     height = tv_height.getText().toString();
-                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || height.length() <= 0 || s.length() <= 0) {
+                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || height.length() <= 0 || s== null) {
                         Toast.makeText(WaterActivity.this, "请检查输入，输入不能为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
@@ -82,7 +81,8 @@ public class WaterActivity extends Activity {
                 }
             });
 
-        } else {
+
+        } else {//米
             tv_press.setHint("kpa");
             tv_diameter.setText("mm");
             tv_22.setHint("lpm");
@@ -90,7 +90,7 @@ public class WaterActivity extends Activity {
             tv_height.setHint("0m");
             mValue();
             pvOptions.setPicker(optionsItems);
-            pvOptions.setTitle("直径尺寸");
+            pvOptions.setTitle("水带直径");
             pvOptions.setCyclic(false);
             pvOptions.setSelectOptions(1);
             pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
@@ -106,6 +106,7 @@ public class WaterActivity extends Activity {
                     tv_diameter.setText(ss + "mm");
                 }
             });
+
             tv_conclusion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -114,24 +115,24 @@ public class WaterActivity extends Activity {
                     press = tv_press.getText().toString();
                     length = tv_44.getText().toString();
                     height = tv_height.getText().toString();
-                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 ||height.length()<=0|| ss.length() <= 0) {
+                    if (flowrate.length() <= 0 || number.length() <= 0 || length.length() <= 0 || height.length() <= 0 || ss.length() == 0) {
                         Toast.makeText(WaterActivity.this, "请检查输入，输入不能为空", Toast.LENGTH_LONG).show();
+                    } else {
+                        ll_result.setVisibility(View.VISIBLE);
+                        int dia = Integer.parseInt(ss);
+                        double b = (dia == 38) ? 1.5 : (dia == 45) ? 1.75 : (dia == 51) ? 2 : (dia == 64) ? 2.5 : (dia == 80) ? 3 : (dia == 93) ? 3.5
+                                : (dia == 102) ? 4 : (dia == 127) ? 5 : (dia == 152) ? 6 : (dia == 183) ? 7.25 : (dia == 304) ? 12 : 0;
+                        double volume = Math.pow(b / 2, 2) * 3.14159 / 144 * Integer.parseInt(length) * 3.28043 * Integer.parseInt(number) * 7.48;
+                        double weight = volume * 8.5 * 1.1;
+                        double c = (b == 1.5) ? 20.3 : (b == 1.75) ? 30.14 : (b == 2) ? 40.38 : (b == 2.5) ? 66.6 : (b == 3) ? 110.25 : (b == 3.5) ?
+                                171.5 : (b == 4) ? 228 : (b == 5) ? 389 : (b == 6) ? 617 : (b == 7.25) ? 1040 : 0;
+                        double loss = Math.pow((Double.parseDouble(flowrate) * 0.2641720373 / Integer.parseInt(number)), 2) / (Math.pow(c, 2))
+                                / 100 * Integer.parseInt(length) * 3.28043 + Integer.parseInt(height) * 3.28043 * 0.4335161;
+                        tv_volume.setText(Math.round(volume * 3.785412) + " liters");
+                        tv_weight.setText(Math.round(weight * 0.4535929) + " kg");
+                        tv_totalloss.setText(Math.round(loss * 6.894745) + " kpa");
                     }
-                    else{
-                    ll_result.setVisibility(View.VISIBLE);
-                    int dia = Integer.parseInt(ss);
-                    double b = (dia == 38) ? 1.5 : (dia == 45) ? 1.75 : (dia == 51) ? 2 : (dia == 64) ? 2.5 : (dia == 80) ? 3 : (dia == 93) ? 3.5
-                            : (dia == 102) ? 4 : (dia == 127) ? 5 : (dia == 152) ? 6 : (dia == 183) ? 7.25 : (dia == 304) ? 12 : 0;
-                    double volume = Math.pow(b / 2, 2) * 3.14159 / 144 * Integer.parseInt(length) * 3.28043 * Integer.parseInt(number) * 7.48;
-                    double weight = volume * 8.5 * 1.1;
-                    double c = (b == 1.5) ? 20.3 : (b == 1.75) ? 30.14 : (b == 2) ? 40.38 : (b == 2.5) ? 66.6 : (b == 3) ? 110.25 : (b == 3.5) ?
-                            171.5 : (b == 4) ? 228 : (b == 5) ? 389 : (b == 6) ? 617 : (b == 7.25) ? 1040 : 0;
-                    double loss = Math.pow((Double.parseDouble(flowrate) * 0.2641720373 / Integer.parseInt(number)), 2) / (Math.pow(c, 2))
-                            / 100 * Integer.parseInt(length) * 3.28043 + Integer.parseInt(height) * 3.28043 * 0.4335161;
-                    tv_volume.setText(Math.round(volume * 3.785412) + " liters");
-                    tv_weight.setText(Math.round(weight * 0.4535929) + " kg");
-                    tv_totalloss.setText(Math.round(loss * 6.894745) + " kpa");
-                }}
+                }
             });
         }
         tv_diameter.setOnClickListener(new View.OnClickListener() {
@@ -144,18 +145,19 @@ public class WaterActivity extends Activity {
         });
     }
 
+
     private void usual() {
         tv_2.setText("总流量");
-        tv_3.setText("软管的数量");
-        tv_4.setText("软管的长度");
+        tv_3.setText("水带铺设数量");
+        tv_4.setText("铺设长度");
         tv_line1.setVisibility(View.GONE);
         ll_press.setVisibility(View.GONE);
     }
 
     private void special12() {
-        tv_2.setText("流速");
-        tv_3.setText("单个软管长度");
-        tv_4.setText("总的软管长度");
+        tv_2.setText("水带流速");
+        tv_3.setText("单个水带长度");
+        tv_4.setText("总的水带长度");
         tv_line1.setVisibility(View.VISIBLE);
         ll_press.setVisibility(View.VISIBLE);
     }

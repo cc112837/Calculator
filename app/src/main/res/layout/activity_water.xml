@@ -52,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="软管直径"
+                    android:text="水带直径"
                     android:textColor="@color/gray"
                     android:textSize="17sp" />
 
@@ -117,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="软管数量"
+                    android:text="水管铺设数量"
                     android:textColor="@color/gray"
                     android:textSize="17sp" />
 
@@ -151,7 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="软管长度"
+                    android:text="铺设长度"
                     android:textColor="@color/gray"
                     android:textSize="17sp" />
 
@@ -275,7 +275,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="软管近似总容量"
+                        android:text="水带存水量"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -306,7 +306,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="软管近似总重量"
+                        android:text="水带的总重量"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -353,12 +353,14 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_line2"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/line"
                     android:visibility="gone" />
 
                 <LinearLayout
+                    android:id="@+id/tv_ll1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

@@ -36,7 +36,7 @@ public class FireActivity extends Activity {
             tv_conclusion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (et_size.length() <= 0) {
+                    if (et_size.length() <= 0||s==null) {
                         Toast.makeText(FireActivity.this, "请检查输入项是否为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
@@ -64,7 +64,7 @@ public class FireActivity extends Activity {
             tv_conclusion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (et_size.length() <= 0) {
+                    if (et_size.length() <= 0||s==null) {
                         Toast.makeText(FireActivity.this, "请检查输入项是否为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
@@ -128,7 +128,7 @@ public class FireActivity extends Activity {
         tv_footheight = (TextView) findViewById(R.id.tv_footheight);
         setVaule();
         pvOptions.setPicker(optionsItems);
-        pvOptions.setTitle("泡沫液强度选择");
+        pvOptions.setTitle("浓缩泡沫比例");
         pvOptions.setCyclic(false);
         pvOptions.setSelectOptions(1);
         pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
