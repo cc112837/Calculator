@@ -272,6 +272,7 @@
                     android:padding="15dp">
 
                     <TextView
+                        android:id="@+id/tv_111"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -303,6 +304,7 @@
                     android:padding="15dp">
 
                     <TextView
+                        android:id="@+id/tv_222"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
@@ -321,7 +323,72 @@
                         android:textSize="17sp" />
 
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line"
+                    android:visibility="gone" />
 
+                <LinearLayout
+                    android:id="@+id/tv_ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="高度损失"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_333"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/line"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:text="变化损失"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/tv_444"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="psi"
+                        android:textColor="@color/gray"
+                        android:textSize="17sp" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1px"
@@ -343,70 +410,6 @@
 
                     <TextView
                         android:id="@+id/tv_totalloss"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="psi"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/line"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:id="@+id/tv_ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="总压力损失"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="psi"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/line"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="总压力损失"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-
-                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
