@@ -38,7 +38,7 @@
             android:textColor="@color/buttoncolor"
             android:layout_marginTop="100dp"
             android:background="@mipmap/button_bg"
-            android:text="水带磨损计算" />
+            android:text="水带压力磨损" />
 
         <Button
             android:id="@+id/fire"

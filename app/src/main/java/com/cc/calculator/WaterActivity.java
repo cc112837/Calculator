@@ -3,7 +3,6 @@ package com.cc.calculator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -88,10 +87,10 @@ public class WaterActivity extends Activity {
                             ll_result.setVisibility(View.VISIBLE);
                             int num=Math.round(Integer.parseInt(length)/(Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
-                            tv_weight.setText("0" + " psi");
+                            tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
                             tv_333.setText(Math.round(Integer.parseInt(height)*0.4335)+ "psi");
-                            tv_444.setText("0" + "psi");
-                            tv_totalloss.setText("0" + " psi");
+                            tv_444.setText("--");
+                            tv_totalloss.setText("--");
                         }
                     }
                 }
@@ -155,10 +154,10 @@ public class WaterActivity extends Activity {
                             ll_result.setVisibility(View.VISIBLE);
                             int num=Math.round(Integer.parseInt(length) / (Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
-                            tv_weight.setText("0" + " kpa");
-                            tv_totalloss.setText("0" + " kpa");
+                            tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
+                            tv_totalloss.setText("--");
                             tv_333.setText(Math.round(Integer.parseInt(height)*0.4335*6.894745) + "kpa");
-                            tv_444.setText("0" + "kpa");
+                            tv_444.setText("--");
                         }
                     }
                 }

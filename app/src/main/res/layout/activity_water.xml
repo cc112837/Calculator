@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingRight="40dp"
-            android:text="水带摩擦损失"
+            android:text="水带压力磨损"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
