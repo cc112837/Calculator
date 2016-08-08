@@ -22,7 +22,7 @@ public class FireActivity extends Activity {
     private OptionsPickerView pvOptions;
     private String s;
     private EditText et_size;
-    private TextView tv_rate, tv_time, tv_conclusion, tv_density, tv_surface, tv_appli, tv_flowrate, tv_volume, tv_inchhight, tv_footheight;//罐尺寸，泡沫液强度选择，所需时间
+    private TextView tv_rate, tv_time, tv_conclusion, tv_density, tv_surface, tv_appli, tv_flowrate, tv_volume, tv_inchhight;//罐尺寸，泡沫液强度选择，所需时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,7 @@ public class FireActivity extends Activity {
                         double applirate = areaDensity * area;
                         double flowrate = Integer.parseInt(s) * applirate * 0.01;
                         double volume = flowrate * 65;
-                        double footh = 3.14159 * Math.pow(size / (2 * 1.0), 2) * 7.48;
-                        double inchh = footh / (12 * 1.0);
-                        tv_footheight.setText(Math.round(footh) + "gallons");
+                        double inchh =volume*2 ;
                         tv_inchhight.setText(Math.round(inchh) + "gallons");
                         tv_volume.setText(Math.round(volume) + "gallons");
                         tv_flowrate.setText(Math.round(flowrate) + "gpm");
@@ -73,12 +71,10 @@ public class FireActivity extends Activity {
                         double area = Math.pow(Math.round(size * 50) / (100 * 1.0), 2) * 3.14159;
                         double applirate = areaDensity * area;
                         double flowrate = Integer.parseInt(s) * applirate * 0.01;
-                        double volume = flowrate * 65;
-                        double footh = area * 7.48;
-                        double inchh = footh / (12 * 1.0);
-                        tv_footheight.setText(Math.round(footh * 3.785412) + " liters");
-                        tv_inchhight.setText(Math.round(inchh * 3.785412) + " liters");
-                        tv_volume.setText(Math.round(volume * 3.785412) + " liters");
+                        double volume = flowrate * 65;;
+                        double inchh = volume*2;
+                        tv_inchhight.setText(Math.round(inchh * 3.785412) + " L");
+                        tv_volume.setText(Math.round(volume * 3.785412) + " L");
                         tv_flowrate.setText(Math.round(flowrate * 3.785412) + " lpm");
                         tv_appli.setText(Math.round(applirate * 3.785412) + " lpm");
                         tv_surface.setText(Math.round(0.09290304 * area) + "m²");
@@ -125,7 +121,6 @@ public class FireActivity extends Activity {
         tv_volume = (TextView) findViewById(R.id.tv_volume);
         tv_inchhight = (TextView) findViewById(R.id.tv_inchhight);
         tv_conclusion = (TextView) findViewById(R.id.tv_conclusion);
-        tv_footheight = (TextView) findViewById(R.id.tv_footheight);
         setVaule();
         pvOptions.setPicker(optionsItems);
         pvOptions.setTitle("浓缩泡沫比例");

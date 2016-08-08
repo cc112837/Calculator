@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingRight="40dp"
-            android:text="燃烧成本计算"
+            android:text="泡沫用量计算"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
@@ -196,7 +196,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="表面积"
+                        android:text="油罐表面积"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -226,7 +226,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="泡沫液的供给强度"
+                        android:text="泡沫混合液的供给强度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -256,7 +256,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="泡沫液强度"
+                        android:text="泡沫浓缩液的供给强度"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -316,7 +316,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="罐每英寸高度的容积"
+                        android:text="建议准备的泡沫液流量"
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
 
@@ -330,37 +330,14 @@
                         android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/line" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:text="罐每英尺高度容积"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-
-                    <TextView
-                        android:id="@+id/tv_footheight"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="right"
-                        android:text="gallons"
-                        android:textColor="@color/gray"
-                        android:textSize="17sp" />
-                </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="#ff0000"
+                android:text="*威廉姆斯实践建议"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
