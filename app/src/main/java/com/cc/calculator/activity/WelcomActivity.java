@@ -1,8 +1,10 @@
-package com.cc.calculator;
+package com.cc.calculator.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.cc.calculator.R;
 
 public class WelcomActivity extends Activity {
 

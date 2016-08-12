@@ -6,7 +6,7 @@
     android:background="@color/buttoncolor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.cc.calculator.FireActivity">
+    tools:context=".activity.FireActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

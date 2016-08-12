@@ -1,4 +1,4 @@
-package com.cc.calculator;
+package com.cc.calculator.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.cc.calculator.R;
 
 import java.util.ArrayList;
 
@@ -78,6 +79,8 @@ public class WaterActivity extends Activity {
                             double loss = Math.pow((Double.parseDouble(flowrate) / Integer.parseInt(number)), 2) / (Math.pow(c, 2))
                                     / 100 * Integer.parseInt(length) + Integer.parseInt(height) * 0.4335161;
                             ll_result.setVisibility(View.VISIBLE);
+                            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                    hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             tv_volume.setText(Math.round(volume) + " gallons");
                             tv_weight.setText(Math.round(weight) + " kg");
                             tv_totalloss.setText(Math.round(loss) + " psi");
@@ -85,6 +88,8 @@ public class WaterActivity extends Activity {
                             Toast.makeText(WaterActivity.this, "请检查输入，进口压力不能为空", Toast.LENGTH_LONG).show();
                         } else {
                             ll_result.setVisibility(View.VISIBLE);
+                            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                    hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             int num=Math.round(Integer.parseInt(length)/(Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
                             tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
@@ -137,6 +142,8 @@ public class WaterActivity extends Activity {
                         int dia = Integer.parseInt(ss);
                         if (("").equals(press) && dia != 304) {
                             ll_result.setVisibility(View.VISIBLE);
+                            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                    hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             double b = (dia == 38) ? 1.5 : (dia == 45) ? 1.75 : (dia == 51) ? 2 : (dia == 64) ? 2.5 : (dia == 80) ? 3 : (dia == 93) ? 3.5
                                     : (dia == 102) ? 4 : (dia == 127) ? 5 : (dia == 152) ? 6 : (dia == 183) ? 7.25 : (dia == 304) ? 12 : 0;
                             double volume = Math.pow(b / 2, 2) * 3.14159 / 144 * Integer.parseInt(length) * 3.28043 * Integer.parseInt(number) * 7.48;
@@ -152,11 +159,13 @@ public class WaterActivity extends Activity {
                             Toast.makeText(WaterActivity.this, "请检查输入，进口压力不能为空", Toast.LENGTH_LONG).show();
                         } else {
                             ll_result.setVisibility(View.VISIBLE);
+                            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                    hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                             int num=Math.round(Integer.parseInt(length) / (Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
                             tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
                             tv_totalloss.setText("--");
-                            tv_333.setText(Math.round(Integer.parseInt(height)*0.4335*6.894745) + "kpa");
+                            tv_333.setText(Math.round(Integer.parseInt(height)*3.28043*0.4335*6.894745) + "kpa");
                             tv_444.setText("--");
                         }
                     }

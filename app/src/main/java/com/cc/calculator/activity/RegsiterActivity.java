@@ -1,4 +1,4 @@
-package com.cc.calculator;
+package com.cc.calculator.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cc.calculator.R;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -56,7 +57,6 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
 
     private void initSms() {
         SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
-
     }
 
     @Override

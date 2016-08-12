@@ -1,4 +1,4 @@
-package com.cc.calculator;
+package com.cc.calculator.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.cc.calculator.R;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class FireActivity extends Activity {
                         Toast.makeText(FireActivity.this, "请检查输入项是否为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
+                        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                hideSoftInputFromWindow(FireActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         int size = Integer.parseInt(et_size.getText().toString());
                         double areaDensity = size < 151 ? 0.16 : size < 201 ? 0.18 : size < 251 ? 0.2 : size < 301 ? 0.22 : size < 401 ? 0.25 : 0;
                         double area = Math.pow(size / (2 * 1.0), 2) * 3.14159;
@@ -66,6 +69,8 @@ public class FireActivity extends Activity {
                         Toast.makeText(FireActivity.this, "请检查输入项是否为空", Toast.LENGTH_LONG).show();
                     } else {
                         ll_result.setVisibility(View.VISIBLE);
+                        ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
+                                hideSoftInputFromWindow(FireActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         double size = Integer.parseInt(et_size.getText().toString()) * 3.280833437;
                         double areaDensity = size < 151 ? 0.16 : size < 201 ? 0.18 : size < 251 ? 0.2 : size < 301 ? 0.22 : size < 401 ? 0.25 : 0;
                         double area = Math.pow(Math.round(size * 50) / (100 * 1.0), 2) * 3.14159;

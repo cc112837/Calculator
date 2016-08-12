@@ -1,4 +1,4 @@
-package com.cc.calculator;
+package com.cc.calculator.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.cc.calculator.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button water,fire,meter,imper;//水带磨损，燃烧成本，米，英制
