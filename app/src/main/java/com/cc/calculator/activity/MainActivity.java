@@ -1,68 +1,105 @@
 package com.cc.calculator.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.cc.calculator.R;
+import com.cc.calculator.fragment.ChangeFragmentHelper;
+import com.cc.calculator.fragment.HomeFragment;
+import com.cc.calculator.fragment.MyFragment;
+import com.cc.calculator.fragment.NewsFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button water,fire,meter,imper;//水带磨损，燃烧成本，米，英制
+public class MainActivity extends AppCompatActivity {
     private static boolean isExit = false;//标志是否退出应用
-    String flag="imper";
+    private LinearLayout tab;
+    private FrameLayout container;
+    private RadioGroup rg;
+    private Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        Fragment fragment = new HomeFragment();
+
+        ChangeFragmentHelper helper = new ChangeFragmentHelper();
+        helper.setTargetFragment(fragment);
+        helper.setIsClearStackBack(true);
+
+        changeFragment(helper);
+
+        initView();
     }
-
-    private void init() {
-        water=(Button) findViewById(R.id.water);
-        fire=(Button) findViewById(R.id.fire);
-        meter=(Button) findViewById(R.id.meter);
-        imper=(Button) findViewById(R.id.imper);
-        water.setOnClickListener(this);
-        fire.setOnClickListener(this);
-        meter.setOnClickListener(this);
-        imper.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.water:
-                Intent intent=new Intent(MainActivity.this,WaterActivity.class);
-                intent.putExtra("flag",flag);
-                startActivity(intent);
-                break;
-            case  R.id.fire:
-                Intent intent1=new Intent(MainActivity.this,FireActivity.class);
-                intent1.putExtra("flag",flag);
-                startActivity(intent1);
-                break;
-            case R.id.meter:
-                flag="meter";
-                meter.setBackgroundResource(R.mipmap.left);
-                meter.setTextColor(getResources().getColor(R.color.white));
-                imper.setBackgroundResource(R.mipmap.white_right);
-                imper.setTextColor(getResources().getColor(R.color.buttoncolor));
-                break;
-            case R.id.imper:
-                flag="imper";
-                meter.setBackgroundResource(R.mipmap.white_left);
-                meter.setTextColor(getResources().getColor(R.color.buttoncolor));
-                imper.setBackgroundResource(R.mipmap.right);
-                imper.setTextColor(getResources().getColor(R.color.white));
-                break;
+    private void changeFragment(ChangeFragmentHelper helper) {
+        //获取需要跳转的Fragment
+        Fragment targetFragment = helper.getTargetFragment();
+        //获取是否清空回退栈
+        boolean clearStackBack = helper.isClearStackBack();
+        //获取是否加入回退栈
+        String targetFragmentTag = helper.getTargetFragmentTag();
+        //获取Bundle
+        Bundle bundle = helper.getBundle();
+        //是否给Fragment传值
+        if (bundle != null) {
+            targetFragment.setArguments(bundle);
         }
+
+        FragmentManager manager = getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = manager.beginTransaction();
+
+        if (targetFragment != null) {
+            fragmentTransaction.replace(R.id.container, targetFragment);
+        }
+
+        //是否添加到回退栈
+        if (targetFragmentTag != null) {
+            fragmentTransaction.addToBackStack(targetFragmentTag);
+        }
+
+        //是否清空回退栈
+        if (clearStackBack) {
+            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+        fragmentTransaction.commit();
+    }
+
+    private void initView() {
+        container=(FrameLayout) findViewById(R.id.container);
+        tab=(LinearLayout) findViewById(R.id.main_tab);
+        rg=(RadioGroup) findViewById(R.id.main_tabBar);
+        rg.check(R.id.main_home);
+        fragment=null;
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.main_news:
+                        fragment=new NewsFragment();
+                        break;
+                    case R.id.main_home:
+                        fragment=new HomeFragment();
+                        break;
+                    case R.id.main_my:
+                        fragment=new MyFragment();
+                        break;
+                }
+                ChangeFragmentHelper helper = new ChangeFragmentHelper();
+                helper.setTargetFragment(fragment);
+                helper.setIsClearStackBack(true);
+                changeFragment(helper);
+            }
+        });
 
     }
     /**
