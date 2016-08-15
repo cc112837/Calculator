@@ -33,16 +33,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#e8f0f0"
+        android:background="@color/white_1"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="45dip"
+                android:layout_margin="15dp"
+                android:background="@drawable/textview_radius_style"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="请输入手机号码"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000"
+
+                />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/et_phone"
+                android:id="@+id/et_code"
                 android:layout_width="216dp"
                 android:layout_height="45dip"
                 android:layout_marginBottom="15dp"
@@ -51,7 +72,7 @@
                 android:background="@drawable/textview_radius_style"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:hint="请输入手机号"
+                android:hint="请输入验证码"
                 android:maxLength="30"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -74,55 +95,8 @@
                 />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_code"
-                android:layout_width="match_parent"
-                android:layout_height="45dip"
-                android:layout_margin="15dp"
-                android:background="@drawable/textview_radius_style"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:hint="请输入验证码"
-                android:singleLine="true"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000"
 
-                />
-
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/register_password"
-            android:layout_width="match_parent"
-            android:layout_height="45dip"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="15dp"
-            android:background="@drawable/textview_radius_style"
-            android:ellipsize="end"
-            android:hint="请输入密码"
-            android:password="true"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000" />
-
-        <EditText
-            android:id="@+id/register_password_again"
-            android:layout_width="match_parent"
-            android:layout_height="45dip"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="15dp"
-            android:background="@drawable/textview_radius_style"
-            android:ellipsize="end"
-            android:hint="请再次输入密码"
-            android:password="true"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000" />
 
 
         <Button
@@ -130,7 +104,7 @@
             android:layout_width="280dip"
             android:layout_height="45dip"
             android:layout_gravity="center"
-            android:layout_marginTop="15dip"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_radius_style"
             android:gravity="center"
             android:text="注册"

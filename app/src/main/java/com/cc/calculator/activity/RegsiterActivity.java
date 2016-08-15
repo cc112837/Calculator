@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +26,7 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class RegsiterActivity extends Activity implements View.OnClickListener {
-    private EditText et_phone, et_code, register_password;
+    private EditText et_phone, et_code;
     private Button Message_btn, register_btn;
     private ImageView btn_back;
 
@@ -49,7 +48,6 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
     private void initView() {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_code = (EditText) findViewById(R.id.et_code);
-        register_password = (EditText) findViewById(R.id.register_password);
         Message_btn = (Button) findViewById(R.id.Message_btn);
         register_btn = (Button) findViewById(R.id.register_btn);
         btn_back = (ImageView) findViewById(R.id.back);
@@ -63,7 +61,6 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         final String userPhone = et_phone.getText().toString();
         final String Phonecode = et_code.getText().toString();
-        final String pass = register_password.getText().toString();
         switch (v.getId()) {
             case R.id.Message_btn:
                 if (userPhone.length() != 11) {
@@ -111,9 +108,6 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
                 }
                 break;
             case R.id.register_btn:
-                if (pass.length() < 6) {
-                    Toast.makeText(this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
-                }
                 RequestParams params = new RequestParams();
                 params.addBodyParameter("appkey", "159b5bdf78770");
                 params.addBodyParameter("phone", userPhone);
@@ -127,12 +121,9 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
                                     JSONObject object = new JSONObject(responseInfo.result.toString());
                                     String s = object.getString("status");
                                     if ("200".equals(s)) {
-
-                                        Log.e("register", "成功");
-                                        Intent intent = new Intent(RegsiterActivity.this, LoginActivity.class);
+                                        Intent intent = new Intent(RegsiterActivity.this, ChangePwdActivity.class);
                                         startActivity(intent);
                                         finish();
-
                                     } else {
                                         Toast.makeText(RegsiterActivity.this, "验证失败", Toast.LENGTH_LONG).show();
                                     }
