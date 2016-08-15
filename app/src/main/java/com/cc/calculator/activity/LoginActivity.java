@@ -21,7 +21,6 @@ import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
 import com.cc.calculator.utils.MyAndroidUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.HashMap;
 
@@ -39,7 +38,7 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
     private EditText nameText, pwdText;
     private TextView  regButton, forgetButton;
     private String name, pwd;
-    private ImageView iv_qqlogin, iv_weibologin, headicon;
+    private ImageView iv_qqlogin, iv_weibologin;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR = 3;
     private static final int MSG_AUTH_COMPLETE = 4;
@@ -57,9 +56,7 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
         loginBtn = (Button) findViewById(R.id.loginBtn);
         regButton = (TextView) findViewById(R.id.regButton);
         forgetButton = (TextView) findViewById(R.id.forgetButton);
-        headicon = (ImageView) findViewById(R.id.headicon);
         //// TODO: 2016/8/10
-        ImageLoader.getInstance().displayImage(MyApplication.sharedPreferences.getString(Constants.ICON, null), headicon);
         forgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
