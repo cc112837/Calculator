@@ -14,14 +14,13 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cc.calculator.constant.Constants;
-import com.cc.calculator.utils.MyAndroidUtil;
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
+import com.cc.calculator.constant.Constants;
+import com.cc.calculator.utils.MyAndroidUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.HashMap;
@@ -41,7 +40,6 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
     private TextView  regButton, forgetButton;
     private String name, pwd;
     private ImageView iv_qqlogin, iv_weibologin, headicon;
-    private LinearLayout loginLinear;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR = 3;
     private static final int MSG_AUTH_COMPLETE = 4;
@@ -52,7 +50,6 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ShareSDK.initSDK(LoginActivity.this);
-        loginLinear = (LinearLayout) findViewById(R.id.loginLinear);
         iv_qqlogin = (ImageView) findViewById(R.id.iv_qqlogin);
         iv_weibologin = (ImageView) findViewById(R.id.iv_weibologin);
         nameText = (EditText) findViewById(R.id.nameText);
@@ -187,7 +184,6 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    loginLinear.setVisibility(View.VISIBLE);
                     break;
                 case MSG_AUTH_CANCEL: {
                     //取消授权

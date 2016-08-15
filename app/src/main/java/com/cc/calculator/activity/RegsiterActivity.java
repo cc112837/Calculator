@@ -122,6 +122,7 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
                                     String s = object.getString("status");
                                     if ("200".equals(s)) {
                                         Intent intent = new Intent(RegsiterActivity.this, ChangePwdActivity.class);
+                                        intent.putExtra("phone",userPhone);
                                         startActivity(intent);
                                         finish();
                                     } else {

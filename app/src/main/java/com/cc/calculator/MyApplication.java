@@ -3,6 +3,8 @@ package com.cc.calculator;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.StrictMode;
 
 import com.cc.calculator.constant.Constants;
@@ -43,15 +45,12 @@ public class MyApplication extends Application implements
         ImgConfig.initImageLoader();
 
 
-
-
         initImageLoader(instance);
         if (MyApplication.debug) {
             openStrictMode();
         }
 
     }
-
 
 
     @Override
@@ -91,6 +90,15 @@ public class MyApplication extends Application implements
                 .denyCacheImageMultipleSizesInMemory()
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
         ImageLoader.getInstance().init(config);
+    }
+
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
     }
 }
 
