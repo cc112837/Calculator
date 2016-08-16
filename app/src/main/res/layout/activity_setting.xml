@@ -38,15 +38,12 @@
         android:background="@color/white_2"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20px"
-            android:background="@color/white_2" />
+
 
         <LinearLayout
             android:id="@+id/ll_msg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -76,7 +73,7 @@
         <LinearLayout
             android:id="@+id/ll_updata"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -105,7 +102,7 @@
         <LinearLayout
             android:id="@+id/ll_clear"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:padding="10dp">
