@@ -58,8 +58,6 @@ public class ChangePwdActivity extends Activity {
                     startActivity(intent);
                     finish();
                 }
-
-              
             }
         });
     }
