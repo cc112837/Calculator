@@ -54,7 +54,7 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
     }
 
     private void initSms() {
-        SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
+        SMSSDK.initSDK(this, "1620372242f58", "0e1d363c1cdfa893b95dc6db1589cf1c");
     }
 
     @Override
@@ -109,7 +109,7 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.register_btn:
                 RequestParams params = new RequestParams();
-                params.addBodyParameter("appkey", "159b5bdf78770");
+                params.addBodyParameter("appkey", "1620372242f58");
                 params.addBodyParameter("phone", userPhone);
                 params.addBodyParameter("zone", "86");
                 params.addBodyParameter("code", Phonecode);

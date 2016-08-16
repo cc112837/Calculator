@@ -43,8 +43,6 @@ public class MyApplication extends Application implements
         sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         ImgConfig.initImageLoader();
-
-
         initImageLoader(instance);
         if (MyApplication.debug) {
             openStrictMode();
