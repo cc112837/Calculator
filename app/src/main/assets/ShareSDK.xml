@@ -59,8 +59,8 @@
     <SinaWeibo
         Id="1"
         SortId="1"
-        AppKey="3332178896"
-        AppSecret="e580d921992ad5ea652c2a45a164e31c"
+        AppKey="3072455649"
+        AppSecret="c42cbc5daef8385e1ea3c63d523ef586"
         RedirectUrl="http://wanpaiapp.com/oauth/callback/sina"
         ShareByAppClient="true"
         Enable="true" />
@@ -70,8 +70,8 @@
     <QZone
         Id="2"
         SortId="2"
-        AppId="3332178896"
-        AppKey="ae36f4ee3946e1cbb98d6965b0b2ff5c"
+        AppId="1105522293"
+        AppKey="Qfj4uYVQSz1TV3C3"
         ShareByAppClient="true"
         Enable="true" />
     
@@ -115,8 +115,8 @@
 	<QQ
         Id="6"
         SortId="6"
-        AppId="1105190833"
-        AppKey="bBN5SNICioCHo3w2"
+        AppId="1105522293"
+        AppKey="Qfj4uYVQSz1TV3C3"
         ShareByAppClient="true"
         Enable="true" />
     
