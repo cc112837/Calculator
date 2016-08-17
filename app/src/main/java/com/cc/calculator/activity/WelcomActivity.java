@@ -20,7 +20,7 @@ public class WelcomActivity extends Activity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(WelcomActivity.this, MainActivity.class);
+                Intent intent = new Intent(WelcomActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

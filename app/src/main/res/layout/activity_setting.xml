@@ -125,6 +125,17 @@
                 android:layout_marginRight="10dp"
                 android:text="3.5M" />
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/out"
+            android:text="退出登录"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_out"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="150dp"/>
     </LinearLayout>
     </LinearLayout>
 

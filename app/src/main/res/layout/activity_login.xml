@@ -71,6 +71,7 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/textview_radius_style"
                     android:ellipsize="end"
+                    android:password="true"
                     android:gravity="center_vertical"
                     android:hint="请输入密码"
                     android:singleLine="true"

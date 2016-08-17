@@ -20,7 +20,10 @@ import android.widget.Toast;
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.User;
+import com.cc.calculator.model.UserReg;
 import com.cc.calculator.utils.MyAndroidUtil;
+import com.cc.calculator.utils.MyHttpUtils;
 
 import java.util.HashMap;
 
@@ -32,11 +35,11 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 
 
-public class LoginActivity extends Activity implements TextWatcher,PlatformActionListener {
+public class LoginActivity extends Activity implements TextWatcher, PlatformActionListener {
 
     private Button loginBtn;
     private EditText nameText, pwdText;
-    private TextView  regButton, forgetButton;
+    private TextView regButton, forgetButton;
     private String name, pwd;
     private ImageView iv_qqlogin, iv_weibologin;
     private static final int MSG_AUTH_CANCEL = 2;
@@ -49,6 +52,12 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ShareSDK.initSDK(LoginActivity.this);
+
+        if (name != null) {// TODO: 2016/8/17 判断当前用户是否为空
+            name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
+                    null);
+            finishLogin();
+        }
         iv_qqlogin = (ImageView) findViewById(R.id.iv_qqlogin);
         iv_weibologin = (ImageView) findViewById(R.id.iv_weibologin);
         nameText = (EditText) findViewById(R.id.nameText);
@@ -128,7 +137,11 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
 
 
     private void loginAccount(final String userName, final String password) {
-
+        User user = new User();
+        user.setPhone(userName);
+        user.setPassWord(password);
+        String url = Constants.SERVER_URL + "CalculatorUserLoginServlet";
+        MyHttpUtils.handData(handler, 11, url, user);
     }
 
     private void finishLogin() {
@@ -180,6 +193,14 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case 11:
+                    UserReg use = (UserReg) msg.obj;
+                    if ("登录成功".equals(use.getData())) {
+                        finishLogin();
+                    } else {
+                        Toast.makeText(LoginActivity.this, use.getData(), Toast.LENGTH_LONG).show();
+                    }
+                    break;
                 case 1:
                     break;
                 case MSG_AUTH_CANCEL: {
@@ -202,13 +223,19 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
                     if (QQ.NAME.equals(platform)) {
                         final String nickname = res.get("nickname").toString();
                         final String icon = res.get("figureurl_qq_2").toString();
-
+                        MyAndroidUtil.editXmlByString(
+                                Constants.LOGIN_ACCOUNT, nickname);
+                        name = nickname;
+                        finishLogin();
                     }
 
                     if (SinaWeibo.NAME.equals(platform)) {
                         final String nickname = res.get("name").toString();
                         final String icon = res.get("avatar_hd").toString();
-
+                        MyAndroidUtil.editXmlByString(
+                                Constants.LOGIN_ACCOUNT, nickname);
+                        name = nickname;
+                        finishLogin();
                     }
 
 
@@ -229,7 +256,6 @@ public class LoginActivity extends Activity implements TextWatcher,PlatformActio
                     true);
             if (isFirst) {
                 MyAndroidUtil.editXml("IsFirst", false);
-
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {

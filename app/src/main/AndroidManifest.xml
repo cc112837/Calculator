@@ -76,12 +76,24 @@
         <activity
             android:name=".activity.ChangePwdActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.CollectionActivity" />
-        <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.AdviceActivity" />
-        <activity android:name=".activity.ServiceActivity" />
-        <activity android:name=".activity.UpdataPwdActivity"></activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AdviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UpdataPwdActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

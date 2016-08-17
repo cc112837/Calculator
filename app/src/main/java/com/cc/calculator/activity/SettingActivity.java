@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.cc.calculator.R;
 public class SettingActivity extends Activity {
     private ImageView back;
     private TextView tv_volume;
+    private Button out;
     private LinearLayout ll_msg,ll_updata,ll_clear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,14 @@ public class SettingActivity extends Activity {
         ll_clear=(LinearLayout) findViewById(R.id.ll_clear);
         ll_updata=(LinearLayout) findViewById(R.id.ll_updata);
         ll_msg=(LinearLayout) findViewById(R.id.ll_msg);
+        out=(Button) findViewById(R.id.out);
+        out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SettingActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         ll_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
