@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cc.calculator.R;
+import com.cc.calculator.constant.Constants;
+import com.cc.calculator.utils.MyAndroidUtil;
 
 public class SettingActivity extends Activity {
     private ImageView back;
@@ -36,7 +38,9 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(SettingActivity.this,LoginActivity.class);
+                MyAndroidUtil.removeXml(Constants.LOGIN_PWD);
                 startActivity(intent);
+                finish();
             }
         });
         ll_msg.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +53,7 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this,"清理缓存中",Toast.LENGTH_LONG).show();
-                SystemClock.sleep(2000);
+                SystemClock.sleep(3000);
                 tv_volume.setText("0M");
                 Toast.makeText(SettingActivity.this,"清理完成",Toast.LENGTH_LONG).show();
             }

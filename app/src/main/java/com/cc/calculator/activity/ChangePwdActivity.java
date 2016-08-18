@@ -32,6 +32,7 @@ public class ChangePwdActivity extends Activity {
                     if ("注册成功".equals(userreg.getData())) {
                         MyAndroidUtil.editXmlByString(
                                 Constants.LOGIN_ACCOUNT, phone);
+                        MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD,pass);
                         Intent intent = new Intent(ChangePwdActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();

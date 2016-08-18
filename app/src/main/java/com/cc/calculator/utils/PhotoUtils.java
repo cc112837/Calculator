@@ -2,6 +2,12 @@ package com.cc.calculator.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.widget.ImageView;
 
 import com.cc.calculator.R;
@@ -11,6 +17,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,32 +27,37 @@ import java.io.IOException;
  * Created by lzw on 15/4/24.
  */
 public class PhotoUtils {
-    public static DisplayImageOptions avatarImage = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.mipmap.default_icon)
-            .showImageForEmptyUri(R.mipmap.default_icon)
-            .showImageOnFail(R.mipmap.default_icon)
-            .cacheInMemory(true)
-            .cacheOnDisc(true)
-            .considerExifParams(true)
-            .imageScaleType(ImageScaleType.EXACTLY)
-            .bitmapConfig(Bitmap.Config.RGB_565)
-            .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
-                    //.displayer(new RoundedBitmapDisplayer(20))
-                    //.displayer(new FadeInBitmapDisplayer(100))// 淡入
-            .build();
-    public static DisplayImageOptions avatarImageOptions = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.mipmap.default_icon)
-            .showImageForEmptyUri(R.mipmap.default_icon)
-                    .showImageOnFail(R.mipmap.default_icon)
-                    .cacheInMemory(true)
-                    .cacheOnDisc(true)
-                    .considerExifParams(true)
-                    .imageScaleType(ImageScaleType.EXACTLY)
-                    .bitmapConfig(Bitmap.Config.RGB_565)
-                    .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
-                            //.displayer(new RoundedBitmapDisplayer(20))
-                            //.displayer(new FadeInBitmapDisplayer(100))// 淡入
-                    .build();
+
+    /**
+     * 将图片变为圆角
+     *
+     * @param bitmap 原Bitmap图片
+     * @param pixels 图片圆角的弧度(单位:像素(px))
+     * @return 带有圆角的图片(Bitmap 类型)
+     */
+    public static Bitmap toRoundCorner(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
+    }
+
+
     public static DisplayImageOptions avatarlogin = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.mipmap.default_icon)
             .showImageForEmptyUri(R.mipmap.default_icon)
@@ -152,7 +164,32 @@ public class PhotoUtils {
         recycle(bitmap);
         return newPath;
     }
-
+    public static void saveBitmap(String filePath,
+                                  Bitmap bitmap) {
+        File file = new File(filePath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            if (bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)) {
+                out.flush();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+           closeQuietly(out);
+        }
+    }
+    public static void closeQuietly(Closeable closeable) {
+        try {
+            closeable.close();
+        } catch (Exception e) {
+        }
+    }
     public static void recycle(Bitmap bitmap) {
         // 先判断是否已经回收
         if (bitmap != null && !bitmap.isRecycled()) {

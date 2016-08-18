@@ -123,7 +123,6 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
 
         name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
                 null);
-        pwd = MyApplication.sharedPreferences.getString(Constants.LOGIN_PWD, null);
         if (name != null)
             nameText.setText(name);
         thread.start();
@@ -139,7 +138,6 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
     }
 
     private void finishLogin() {
-
         Constants.USER_NAME = name;
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -191,6 +189,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                     UserReg use = (UserReg) msg.obj;
                     if ("登录成功".equals(use.getData())) {
                         MyAndroidUtil.editXmlByString(Constants.LOGIN_ACCOUNT,name);
+                        MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD,pwd);
                         finishLogin();
                     } else {
                         Toast.makeText(LoginActivity.this, use.getData(), Toast.LENGTH_LONG).show();
@@ -220,6 +219,8 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                         final String icon = res.get("figureurl_qq_2").toString();
                         MyAndroidUtil.editXmlByString(
                                 Constants.LOGIN_ACCOUNT, nickname);
+                        MyAndroidUtil.editXml(
+                                Constants.SHARELOGIN, true);
                         name = nickname;
                         finishLogin();
                     }
@@ -229,6 +230,8 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                         final String icon = res.get("avatar_hd").toString();
                         MyAndroidUtil.editXmlByString(
                                 Constants.LOGIN_ACCOUNT, nickname);
+                        MyAndroidUtil.editXml(
+                                Constants.SHARELOGIN, true);
                         name = nickname;
                         finishLogin();
                     }

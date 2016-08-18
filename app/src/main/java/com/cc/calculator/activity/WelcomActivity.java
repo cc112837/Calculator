@@ -23,12 +23,18 @@ public class WelcomActivity extends Activity {
                     e.printStackTrace();
                 }
                 String name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
-                        null);
+                        "");
+                String pwd = MyApplication.sharedPreferences.getString(Constants.LOGIN_PWD,
+                        "");
+
+                boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
+                        false);
                 Intent intent;
-                if (name == "" ) {
-                    intent = new Intent(WelcomActivity.this, LoginActivity.class);
-                } else {
+                if ((name != "")&&(pwd!=""||sharelogin) ) {
                     intent = new Intent(WelcomActivity.this, MainActivity.class);
+                    intent.putExtra("name",name);
+                } else {
+                    intent = new Intent(WelcomActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);
                 finish();

@@ -33,6 +33,7 @@
             android:layout_height="80dp"
             android:src="@mipmap/default_icon" />
         <TextView
+            android:id="@+id/tv_nickname"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -13,9 +13,10 @@ package com.cc.calculator.constant;
 public class Constants {
     public final static String SHARED_PREFERENCES = "userinfo";
     public static String USER_NAME = "";
-    public final static String LOGIN_ACCOUNT = "";
-    public final static String LOGIN_PWD = "";
+    public final static String LOGIN_ACCOUNT = "user";
+    public final static String LOGIN_PWD = "pass";
+    public final static String SHARELOGIN = "sharelogin";
     public final static String ICON = "";
     public final static String SERVER_HOST = "117.34.80.117";
-    public final static String SERVER_URL = "http://"+SERVER_HOST+":8080/mhealth/servlet/";
+    public final static String SERVER_URL = "http://xtt123456.jsp.cdnjsp.cn/servlet/";
 }

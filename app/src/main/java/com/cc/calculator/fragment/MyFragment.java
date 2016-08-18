@@ -15,13 +15,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
+import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
 import com.cc.calculator.activity.AboutActivity;
 import com.cc.calculator.activity.AdviceActivity;
 import com.cc.calculator.activity.CollectionActivity;
+import com.cc.calculator.activity.MainActivity;
 import com.cc.calculator.activity.SettingActivity;
+import com.cc.calculator.constant.Constants;
 import com.cc.calculator.utils.CacheUtils;
+import com.cc.calculator.utils.PathUtils;
+import com.cc.calculator.utils.PhotoUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +40,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private ImageView iv_head;
     private LinearLayout ll_set, ll_share, ll_collect, ll_about, ll_record;
     String dateTime;
+    private TextView tv_nickname;
     private AlertDialog avatarDialog;
 
     @Override
@@ -52,12 +59,23 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         ll_collect = (LinearLayout) v.findViewById(R.id.ll_collect);
         ll_about = (LinearLayout) v.findViewById(R.id.ll_about);
         ll_record = (LinearLayout) v.findViewById(R.id.ll_record);
+        tv_nickname=(TextView) v.findViewById(R.id.tv_nickname);
+        boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
+                false);
+        String name = ((MainActivity) getActivity()).getName();
+        if (sharelogin){
+            tv_nickname.setText("昵称："+name);
+        }else {
+            String maskNumber = name.substring(0,3)+"****"+name.substring(7,name.length());
+            tv_nickname.setText("昵称："+maskNumber);
+        }
         iv_head.setOnClickListener(this);
         ll_set.setOnClickListener(this);
         ll_share.setOnClickListener(this);
         ll_collect.setOnClickListener(this);
         ll_about.setOnClickListener(this);
         ll_record.setOnClickListener(this);
+        tv_nickname.setOnClickListener(this);
 
 
     }
@@ -67,6 +85,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+            case R.id.tv_nickname:
+                break;
             case R.id.ll_about://关于界面
                 intent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent);
@@ -169,6 +189,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             case 3:
                 if (data != null) {
                     Bundle extras = data.getExtras();
+                    String path = saveCropAvatar(data);
                     if (extras != null) {
                         Bitmap bitmap = extras.getParcelable("data");
 //                        String uri="";//服务端的头像地址
@@ -186,7 +207,22 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
+    private String saveCropAvatar(Intent data) {
+        Bundle extras = data.getExtras();
+        String path = null;
+        if (extras != null) {
+            Bitmap bitmap = extras.getParcelable("data");
+            if (bitmap != null) {
+                bitmap = PhotoUtils.toRoundCorner(bitmap, 10);
+                path = PathUtils.getAvatarCropPath();
+                PhotoUtils.saveBitmap(path, bitmap);
+                if (bitmap != null && bitmap.isRecycled() == false) {
+                    bitmap.recycle();
+                }
+            }
+        }
+        return path;
+    }
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
@@ -210,27 +246,15 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     private void showShare() {
         OnekeyShare oks = new OnekeyShare();
-        //关闭sso授权
         oks.disableSSOWhenAuthorize();
-        // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
-        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("灭火助手");
-        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
         oks.setTitleUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
-        // text是分享文本，所有平台都需要这个字段
         oks.setText("灭火助手");
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
         oks.setImageUrl("http://img.wdjimg.com/mms/icon/v1/e/ff/2a699806f4202b232e3d8a0c08ecaffe_96_96.png");//
-        // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
-        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
         oks.setComment("灭火助手");
-        // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
-        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
-        // 启动分享GUI
         oks.show(getContext());
     }
 }

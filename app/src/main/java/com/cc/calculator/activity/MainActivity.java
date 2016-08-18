@@ -1,5 +1,6 @@
 package com.cc.calculator.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,12 +26,24 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout container;
     private RadioGroup rg;
     private Fragment fragment;
+    String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Fragment fragment = new HomeFragment();
-
+        Intent intent=getIntent();
+        String name = intent.getStringExtra("name");
+        setName(name);
         ChangeFragmentHelper helper = new ChangeFragmentHelper();
         helper.setTargetFragment(fragment);
         helper.setIsClearStackBack(true);
