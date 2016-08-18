@@ -44,8 +44,6 @@ public class ChangePwdActivity extends Activity {
                     UpdaUser user= (UpdaUser) msg.obj;
                         if ("密码修改成功".equals(user.getData())) {
                             Toast.makeText(ChangePwdActivity.this,"新的密码设置成功，请重新登录",Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(ChangePwdActivity.this, LoginActivity.class);
-                            startActivity(intent);
                             finish();
                         }
                     break;
