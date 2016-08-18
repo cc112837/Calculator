@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.model.UserReg;
 import com.lidroid.xutils.HttpUtils;
@@ -33,12 +34,17 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord", ((User) o).getPassWord());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserReg(), handler, what));
         }
+        if (what == 13) {
+            params.addBodyParameter("phone", ((User) o).getPhone());
+            params.addBodyParameter("passWord1", ((User) o).getPassWord());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
+        }
         if (what == 12) {
             params.addBodyParameter("phone", MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
                     null));
             params.addBodyParameter("passWord1", ((User) o).getPassWord());
             params.addBodyParameter("passWord2", ((User) o).getPhone());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserReg(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
 
     }

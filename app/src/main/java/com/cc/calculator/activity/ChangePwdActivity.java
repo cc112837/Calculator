@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.model.UserReg;
 import com.cc.calculator.utils.MyAndroidUtil;
@@ -22,21 +23,31 @@ public class ChangePwdActivity extends Activity {
     private EditText register_password, register_password_again;
     private Button confirm_btn;
     private ImageView btn_back;
-    private String phone,pass;
+    private String phone, pass, flag;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+
             switch (msg.what) {
                 case 11:
                     UserReg userreg = (UserReg) msg.obj;
-                    if ("注册成功".equals(userreg.getData())) {
-                        MyAndroidUtil.editXmlByString(
-                                Constants.LOGIN_ACCOUNT, phone);
-                        MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD,pass);
-                        Intent intent = new Intent(ChangePwdActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                        if ("注册成功".equals(userreg.getData())) {
+                            MyAndroidUtil.editXmlByString(
+                                    Constants.LOGIN_ACCOUNT, phone);
+                            MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD, pass);
+                            Intent intent = new Intent(ChangePwdActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    break;
+                case 13:
+                    UpdaUser user= (UpdaUser) msg.obj;
+                        if ("密码修改成功".equals(user.getData())) {
+                            Toast.makeText(ChangePwdActivity.this,"新的密码设置成功，请重新登录",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(ChangePwdActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     break;
             }
         }
@@ -48,6 +59,7 @@ public class ChangePwdActivity extends Activity {
         setContentView(R.layout.activity_change_pwd);
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
+        flag = intent.getStringExtra("pwd");
         init();
     }
 
@@ -76,8 +88,14 @@ public class ChangePwdActivity extends Activity {
                     User user = new User();
                     user.setPhone(phone);
                     user.setPassWord(pass);
-                    String url = Constants.SERVER_URL + "UCalculatorUserRegisterServlet";
-                    MyHttpUtils.handData(handler, 11, url, user);
+                    if ("reg".equals(flag)) {
+                        String url = Constants.SERVER_URL + "UCalculatorUserRegisterServlet";
+                        MyHttpUtils.handData(handler, 11, url, user);
+                    } else {
+                        String url = Constants.SERVER_URL + "CalculatorUserPasswordServlet";
+                        MyHttpUtils.handData(handler, 13, url, user);
+                    }
+
                 }
             }
         });

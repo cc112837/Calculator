@@ -64,7 +64,8 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         forgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, null);
+                Intent intent = new Intent(LoginActivity.this,RegsiterActivity.class);
+                intent.putExtra("pass","forgot");
                 startActivity(intent);
             }
         });
@@ -117,6 +118,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegsiterActivity.class);
+                intent.putExtra("pass","reg");
                 startActivity(intent);
             }
         });
@@ -255,7 +257,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             if (isFirst) {
                 MyAndroidUtil.editXml("IsFirst", false);
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -29,11 +29,14 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
     private EditText et_phone, et_code;
     private Button Message_btn, register_btn;
     private ImageView btn_back;
+    String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regsiter);
+        Intent intent=getIntent();
+        flag=intent.getStringExtra("pass");
         initSms();
         initView();
         initEvent();
@@ -123,6 +126,7 @@ public class RegsiterActivity extends Activity implements View.OnClickListener {
                                     if ("200".equals(s)) {
                                         Intent intent = new Intent(RegsiterActivity.this, ChangePwdActivity.class);
                                         intent.putExtra("phone",userPhone);
+                                        intent.putExtra("pwd",flag);
                                         startActivity(intent);
                                         finish();
                                     } else {

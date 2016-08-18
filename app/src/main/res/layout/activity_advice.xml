@@ -44,7 +44,8 @@
             android:textSize="15sp"
             android:layout_marginTop="20dp"
             android:singleLine="true"
-            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
             android:text="如果建议被采纳，可能获得精美礼品哟！"/>
         <EditText
             android:id="@+id/et_advice"

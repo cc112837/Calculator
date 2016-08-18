@@ -22,6 +22,7 @@ import com.cc.calculator.R;
 import com.cc.calculator.activity.AboutActivity;
 import com.cc.calculator.activity.AdviceActivity;
 import com.cc.calculator.activity.CollectionActivity;
+import com.cc.calculator.activity.LoginActivity;
 import com.cc.calculator.activity.MainActivity;
 import com.cc.calculator.activity.SettingActivity;
 import com.cc.calculator.constant.Constants;
@@ -64,10 +65,10 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 false);
         String name = ((MainActivity) getActivity()).getName();
         if (sharelogin){
-            tv_nickname.setText("昵称："+name);
+            tv_nickname.setText("用户名："+name);
         }else {
             String maskNumber = name.substring(0,3)+"****"+name.substring(7,name.length());
-            tv_nickname.setText("昵称："+maskNumber);
+            tv_nickname.setText("用户名："+maskNumber);
         }
         iv_head.setOnClickListener(this);
         ll_set.setOnClickListener(this);
@@ -104,7 +105,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_set://设置
                 intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,5);
                 break;
             case R.id.iv_head://图像选择
                 AvatarDialog();
@@ -200,6 +201,11 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     }
                 }
 
+                break;
+            case 5:
+                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
                 break;
             default:
                 break;

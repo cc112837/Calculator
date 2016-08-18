@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
-import com.cc.calculator.model.UserReg;
 import com.cc.calculator.utils.MyHttpUtils;
 
 public class UpdataPwdActivity extends Activity {
@@ -25,7 +25,7 @@ public class UpdataPwdActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 12:
-                    UserReg use=(UserReg)msg.obj;
+                    UpdaUser use=(UpdaUser)msg.obj;
                     if ("密码修改成功".equals(use.getData())){
                         Toast.makeText(UpdataPwdActivity.this,"密码修改成功",Toast.LENGTH_LONG).show();
                         finish();

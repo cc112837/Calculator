@@ -21,6 +21,7 @@ import com.cc.calculator.fragment.MyFragment;
 import com.cc.calculator.fragment.NewsFragment;
 
 public class MainActivity extends AppCompatActivity {
+
     private static boolean isExit = false;//标志是否退出应用
     private LinearLayout tab;
     private FrameLayout container;
@@ -145,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
         }
 
+    }
+    public  void clear(){
+        finish();
     }
     Handler handler = new Handler() {
 
