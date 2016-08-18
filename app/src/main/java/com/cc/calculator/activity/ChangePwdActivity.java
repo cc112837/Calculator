@@ -22,7 +22,7 @@ public class ChangePwdActivity extends Activity {
     private EditText register_password, register_password_again;
     private Button confirm_btn;
     private ImageView btn_back;
-    private String phone;
+    private String phone,pass;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -30,6 +30,8 @@ public class ChangePwdActivity extends Activity {
                 case 11:
                     UserReg userreg = (UserReg) msg.obj;
                     if ("注册成功".equals(userreg.getData())) {
+                        MyAndroidUtil.editXmlByString(
+                                Constants.LOGIN_ACCOUNT, phone);
                         Intent intent = new Intent(ChangePwdActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -62,7 +64,7 @@ public class ChangePwdActivity extends Activity {
         confirm_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pass = register_password.getText().toString();
+                pass = register_password.getText().toString();
                 String pass_again = register_password_again.getText().toString();
                 if (pass.length() < 6 || pass_again.length() < 6) {
                     Toast.makeText(ChangePwdActivity.this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
@@ -70,10 +72,6 @@ public class ChangePwdActivity extends Activity {
                     Toast.makeText(ChangePwdActivity.this, "输入密码不一致，请重新确认", Toast.LENGTH_SHORT).show();
                 } else {
                     // TODO: 2016/8/15 （进行登录操作）
-                    MyAndroidUtil.editXmlByString(
-                            Constants.LOGIN_ACCOUNT, phone);
-                    MyAndroidUtil.editXmlByString(
-                            Constants.LOGIN_PWD, pass);
                     User user = new User();
                     user.setPhone(phone);
                     user.setPassWord(pass);

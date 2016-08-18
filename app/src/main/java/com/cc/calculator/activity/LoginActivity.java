@@ -53,11 +53,6 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         setContentView(R.layout.activity_login);
         ShareSDK.initSDK(LoginActivity.this);
 
-        if (name != null) {// TODO: 2016/8/17 判断当前用户是否为空
-            name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
-                    null);
-            finishLogin();
-        }
         iv_qqlogin = (ImageView) findViewById(R.id.iv_qqlogin);
         iv_weibologin = (ImageView) findViewById(R.id.iv_weibologin);
         nameText = (EditText) findViewById(R.id.nameText);
@@ -126,7 +121,6 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             }
         });
 
-        // 已登录过,自动登录
         name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
                 null);
         pwd = MyApplication.sharedPreferences.getString(Constants.LOGIN_PWD, null);
@@ -161,7 +155,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             if (getIntent().getBooleanExtra("isRelogin", false)) {
                 return false;
             }
-        }
+    }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -196,6 +190,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                 case 11:
                     UserReg use = (UserReg) msg.obj;
                     if ("登录成功".equals(use.getData())) {
+                        MyAndroidUtil.editXmlByString(Constants.LOGIN_ACCOUNT,name);
                         finishLogin();
                     } else {
                         Toast.makeText(LoginActivity.this, use.getData(), Toast.LENGTH_LONG).show();
