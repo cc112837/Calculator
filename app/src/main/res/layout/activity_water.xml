@@ -261,6 +261,7 @@
                 android:id="@+id/ll_result"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical">
 
 
@@ -277,7 +278,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="水带存水量"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -287,7 +288,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="psi"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -309,7 +310,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="水带的总重量"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -319,7 +320,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="psi"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                 </LinearLayout>
@@ -343,7 +344,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="高度损失"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -352,7 +353,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -376,7 +377,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="变化损失"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -386,7 +387,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="psi"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
                 <TextView
@@ -405,7 +406,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="总压力损失"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -415,7 +416,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="psi"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>

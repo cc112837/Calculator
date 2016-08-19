@@ -90,7 +90,7 @@ public class WaterActivity extends Activity {
                             ll_result.setVisibility(View.VISIBLE);
                             ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
                                     hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                            int num=Math.round(Integer.parseInt(length)/(Integer.parseInt(number)));
+                            int num=(int)Math.ceil(Integer.parseInt(length)/(Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
                             tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
                             tv_333.setText(Math.round(Integer.parseInt(height)*0.4335)+ "psi");
@@ -161,7 +161,7 @@ public class WaterActivity extends Activity {
                             ll_result.setVisibility(View.VISIBLE);
                             ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
                                     hideSoftInputFromWindow(WaterActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                            int num=Math.round(Integer.parseInt(length) / (Integer.parseInt(number)));
+                            int num=(int)Math.ceil(Integer.parseInt(length) / (Integer.parseInt(number)));
                             tv_volume.setText( num+ " #");
                             tv_weight.setText("--");//// TODO: 2016/8/5 (未计算的)
                             tv_totalloss.setText("--");

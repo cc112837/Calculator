@@ -148,6 +148,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_result"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -163,7 +164,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="泡沫应用的密度"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -173,7 +174,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="gpm/ft²"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -193,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="油罐表面积"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -203,7 +204,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="ft²"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -223,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="泡沫混合液的供给强度"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -233,7 +234,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="gpm"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -253,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="泡沫浓缩液的供给强度"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -263,7 +264,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="gpm"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -283,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="需要的泡沫液容量"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -293,7 +294,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="gallons"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -313,7 +314,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:text="建议准备的泡沫液流量"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
 
                     <TextView
@@ -323,7 +324,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:text="gallons"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
