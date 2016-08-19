@@ -39,6 +39,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord1", ((User) o).getPassWord());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
+        if (what == 14) {
+            params.addBodyParameter("phone", ((User) o).getPhone());
+            params.addBodyParameter("imagePath", ((User) o).getPassWord());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
+        }
         if (what == 12) {
             params.addBodyParameter("phone", MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
                     null));

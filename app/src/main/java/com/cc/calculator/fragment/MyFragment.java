@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
@@ -26,9 +29,13 @@ import com.cc.calculator.activity.LoginActivity;
 import com.cc.calculator.activity.MainActivity;
 import com.cc.calculator.activity.SettingActivity;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.UpdaUser;
+import com.cc.calculator.model.User;
 import com.cc.calculator.utils.CacheUtils;
+import com.cc.calculator.utils.MyHttpUtils;
 import com.cc.calculator.utils.PathUtils;
 import com.cc.calculator.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +47,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 public class MyFragment extends Fragment implements View.OnClickListener {
     private ImageView iv_head;
     private LinearLayout ll_set, ll_share, ll_collect, ll_about, ll_record;
-    String dateTime;
+    String dateTime, path;
     private TextView tv_nickname;
     private AlertDialog avatarDialog;
 
@@ -60,15 +67,15 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         ll_collect = (LinearLayout) v.findViewById(R.id.ll_collect);
         ll_about = (LinearLayout) v.findViewById(R.id.ll_about);
         ll_record = (LinearLayout) v.findViewById(R.id.ll_record);
-        tv_nickname=(TextView) v.findViewById(R.id.tv_nickname);
+        tv_nickname = (TextView) v.findViewById(R.id.tv_nickname);
         boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
                 false);
         String name = ((MainActivity) getActivity()).getName();
-        if (sharelogin){
-            tv_nickname.setText("用户名："+name);
-        }else {
-            String maskNumber = name.substring(0,3)+"****"+name.substring(7,name.length());
-            tv_nickname.setText("用户名："+maskNumber);
+        if (sharelogin) {
+            tv_nickname.setText("用户名：" + name);
+        } else {
+            String maskNumber = name.substring(0, 3) + "****" + name.substring(7, name.length());
+            tv_nickname.setText("用户名：" + maskNumber);
         }
         iv_head.setOnClickListener(this);
         ll_set.setOnClickListener(this);
@@ -105,7 +112,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_set://设置
                 intent = new Intent(getActivity(), SettingActivity.class);
-                startActivityForResult(intent,5);
+                startActivityForResult(intent, 5);
                 break;
             case R.id.iv_head://图像选择
                 AvatarDialog();
@@ -190,28 +197,50 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             case 3:
                 if (data != null) {
                     Bundle extras = data.getExtras();
-                    String path = saveCropAvatar(data);
+                    path = saveCropAvatar(data);
                     if (extras != null) {
-                        Bitmap bitmap = extras.getParcelable("data");
-//                        String uri="";//服务端的头像地址
-//                        ImageLoader
-//                                .getInstance()
-//                                .displayImage(uri,iv_head, PhotoUtils.avatarImage);
-                        iv_head.setImageBitmap(bitmap);
+                        String uri = Constants.SERVER_URL + "UploadServlet";//服务端的头像地址
+                        User user = new User();
+                        user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
+                        user.setPassWord(path);
+                        MyHttpUtils.handData(handler, 14, uri, user);
                     }
                 }
 
                 break;
             case 5:
-                Intent intent=new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                if (data != null) {
+                    String set = data.getStringExtra("set");
+                    if ("set".equals(set)) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }
                 break;
             default:
                 break;
         }
 
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 14:
+                    UpdaUser user = (UpdaUser) msg.obj;
+                    if ("1".equals(user.getStatus())) {
+                        ImageLoader
+                                .getInstance()
+                                .displayImage(path, iv_head, PhotoUtils.avatarImageOption);
+                    } else {
+                        Toast.makeText(getActivity(), user.getData(), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     private String saveCropAvatar(Intent data) {
         Bundle extras = data.getExtras();
@@ -229,6 +258,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         }
         return path;
     }
+
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");

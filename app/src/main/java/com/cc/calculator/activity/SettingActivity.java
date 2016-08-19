@@ -40,7 +40,8 @@ public class SettingActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 MyAndroidUtil.removeXml(Constants.LOGIN_PWD);
-                setResult(100,intent);
+                intent.putExtra("set","set");
+                setResult(-1,intent);
                 finish();
 
             }
