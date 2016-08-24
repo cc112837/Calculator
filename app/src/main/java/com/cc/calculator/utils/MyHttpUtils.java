@@ -12,6 +12,8 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
+import java.io.File;
+
 
 /**
 
@@ -41,7 +43,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 14) {
             params.addBodyParameter("phone", ((User) o).getPhone());
-            params.addBodyParameter("imagePath", ((User) o).getPassWord());
+            params.addBodyParameter("imagePath", new File(((User) o).getPassWord()));
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
         if (what == 12) {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
 import com.cc.calculator.utils.MyAndroidUtil;
@@ -39,11 +40,16 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                MyAndroidUtil.removeXml(Constants.LOGIN_PWD);
-                intent.putExtra("set","set");
-                setResult(-1,intent);
+                if (MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
+                        false)) {
+                    MyAndroidUtil.editXml(
+                            Constants.SHARELOGIN, false);
+                } else {
+                    MyAndroidUtil.removeXml(Constants.LOGIN_PWD);
+                }
+                intent.putExtra("set", "set");
+                setResult(-1, intent);
                 finish();
-
             }
         });
         ll_msg.setOnClickListener(new View.OnClickListener() {

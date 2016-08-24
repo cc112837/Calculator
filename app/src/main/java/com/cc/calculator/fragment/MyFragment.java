@@ -33,11 +33,12 @@ import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.utils.CacheUtils;
 import com.cc.calculator.utils.MyHttpUtils;
-import com.cc.calculator.utils.PathUtils;
 import com.cc.calculator.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
@@ -197,14 +198,17 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             case 3:
                 if (data != null) {
                     Bundle extras = data.getExtras();
-                    path = saveCropAvatar(data);
                     if (extras != null) {
+                        Bitmap bitmap = extras.getParcelable("data");
+                        path = saveToSdCard(bitmap);
                         String uri = Constants.SERVER_URL + "UploadServlet";//服务端的头像地址
                         User user = new User();
                         user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
                         user.setPassWord(path);
                         MyHttpUtils.handData(handler, 14, uri, user);
                     }
+
+
                 }
 
                 break;
@@ -242,21 +246,24 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    private String saveCropAvatar(Intent data) {
-        Bundle extras = data.getExtras();
-        String path = null;
-        if (extras != null) {
-            Bitmap bitmap = extras.getParcelable("data");
-            if (bitmap != null) {
-                bitmap = PhotoUtils.toRoundCorner(bitmap, 10);
-                path = PathUtils.getAvatarCropPath();
-                PhotoUtils.saveBitmap(path, bitmap);
-                if (bitmap != null && bitmap.isRecycled() == false) {
-                    bitmap.recycle();
-                }
+    public String saveToSdCard(Bitmap bitmap){
+        String files =CacheUtils.getCacheDirectory(getActivity(), true, "icon") + dateTime+"_12";
+        File file=new File(files);
+        try {
+            FileOutputStream out=new FileOutputStream(file);
+            if(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)){
+                out.flush();
+                out.close();
             }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        return path;
+        // LogUtils.i(TAG, file.getAbsolutePath());
+        return file.getAbsolutePath();
     }
 
     public void startPhotoZoom(Uri uri) {
