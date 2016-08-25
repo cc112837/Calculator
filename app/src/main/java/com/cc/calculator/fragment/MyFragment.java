@@ -71,12 +71,19 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         tv_nickname = (TextView) v.findViewById(R.id.tv_nickname);
         boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
                 false);
+        String url = MyApplication.sharedPreferences.getString(Constants.ICON,
+               "");
         String name = ((MainActivity) getActivity()).getName();
         if (sharelogin) {
-            tv_nickname.setText("用户名：" + name);
+            iv_head.setEnabled(false);
+            if(url!=""){
+                ImageLoader.getInstance().displayImage(url,iv_head,PhotoUtils.avatarImageOption);
+            }
+            tv_nickname.setText("" + name);
         } else {
+            iv_head.setEnabled(true);
             String maskNumber = name.substring(0, 3) + "****" + name.substring(7, name.length());
-            tv_nickname.setText("用户名：" + maskNumber);
+            tv_nickname.setText("" + maskNumber);
         }
         iv_head.setOnClickListener(this);
         ll_set.setOnClickListener(this);

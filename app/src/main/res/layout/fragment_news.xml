@@ -22,13 +22,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_2">
+        android:background="@color/white_2"
+        android:orientation="vertical">
 
-        <com.handmark.pulltorefresh.library.PullToRefreshListView
-            android:layout_below="@+id/lv_show"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lv_showid"/>
+            android:text="暂未开通，敬请期待" />
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/lv_showid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lv_show" />
     </LinearLayout>
 </LinearLayout>
 

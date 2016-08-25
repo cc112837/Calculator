@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.R;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.model.UserReg;
 import com.cc.calculator.utils.MyAndroidUtil;
@@ -64,8 +65,8 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         forgetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,RegsiterActivity.class);
-                intent.putExtra("pass","forgot");
+                Intent intent = new Intent(LoginActivity.this, RegsiterActivity.class);
+                intent.putExtra("pass", "forgot");
                 startActivity(intent);
             }
         });
@@ -118,7 +119,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegsiterActivity.class);
-                intent.putExtra("pass","reg");
+                intent.putExtra("pass", "reg");
                 startActivity(intent);
             }
         });
@@ -155,7 +156,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
             if (getIntent().getBooleanExtra("isRelogin", false)) {
                 return false;
             }
-    }
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -190,14 +191,29 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                 case 11:
                     UserReg use = (UserReg) msg.obj;
                     if ("登录成功".equals(use.getData())) {
-                        MyAndroidUtil.editXmlByString(Constants.LOGIN_ACCOUNT,name);
-                        MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD,pwd);
+                        MyAndroidUtil.editXmlByString(Constants.LOGIN_ACCOUNT, name);
+                        MyAndroidUtil.editXmlByString(Constants.LOGIN_PWD, pwd);
                         finishLogin();
                     } else {
                         Toast.makeText(LoginActivity.this, use.getData(), Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 1:
+                    break;
+                case 16:
+                    UpdaUser updaUser = (UpdaUser) msg.obj;
+                    if ("0".equals(updaUser.getStatus())||"1".equals(updaUser.getStatus())) {
+                        finishLogin();
+                    } else {
+                        MyAndroidUtil.removeXml(
+                                Constants.LOGIN_ACCOUNT);
+                        MyAndroidUtil.removeXml(
+                                Constants.SHARELOGIN);
+                        MyAndroidUtil.removeXml(
+                                Constants.ICON);
+                        Toast.makeText(LoginActivity.this, updaUser.getData(), Toast.LENGTH_LONG).show();
+                    }
+
                     break;
                 case MSG_AUTH_CANCEL: {
                     //取消授权
@@ -212,6 +228,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                 case MSG_AUTH_COMPLETE: {
                     //授权成功
                     Toast.makeText(LoginActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
+                    finish();
                     Object[] objs = (Object[]) msg.obj;
                     String platform = (String) objs[0];
                     HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
@@ -223,8 +240,14 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                                 Constants.LOGIN_ACCOUNT, nickname);
                         MyAndroidUtil.editXml(
                                 Constants.SHARELOGIN, true);
+                        MyAndroidUtil.editXmlByString(
+                                Constants.ICON, icon);
                         name = nickname;
-                        finishLogin();
+                        String url = Constants.SERVER_URL + "CalculatorUserOtherLoginServlet";
+                        User user = new User();
+                        user.setPhone(nickname);
+                        user.setPassWord(icon);
+                        MyHttpUtils.handData(handler, 16, url, user);
                     }
 
                     if (SinaWeibo.NAME.equals(platform)) {
@@ -234,8 +257,14 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                                 Constants.LOGIN_ACCOUNT, nickname);
                         MyAndroidUtil.editXml(
                                 Constants.SHARELOGIN, true);
+                        MyAndroidUtil.editXmlByString(
+                                Constants.ICON, icon);
                         name = nickname;
-                        finishLogin();
+                        String url = Constants.SERVER_URL + "CalculatorUserOtherLoginServlet";
+                        User user = new User();
+                        user.setPhone(nickname);
+                        user.setPassWord(icon);
+                        MyHttpUtils.handData(handler, 16, url, user);
                     }
 
 

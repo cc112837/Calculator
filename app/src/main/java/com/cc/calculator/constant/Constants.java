@@ -18,5 +18,5 @@ public class Constants {
     public final static String SHARELOGIN = "sharelogin";
     public final static String ICON = "";
     public final static String SERVER_HOST = "117.34.80.117";
-    public final static String SERVER_URL = "http://xtt123456.jsp.cdnjsp.cn/servlet/";
+    public final static String SERVER_URL = "http://xtt123456789.bj.cdnjsp.com.cn/servlet/";
 }

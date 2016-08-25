@@ -61,7 +61,7 @@
         SortId="1"
         AppKey="3072455649"
         AppSecret="c42cbc5daef8385e1ea3c63d523ef586"
-        RedirectUrl="http://firecalculatorapp.com/oauth/callback/sina"
+        RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="true"
         Enable="true" />
 

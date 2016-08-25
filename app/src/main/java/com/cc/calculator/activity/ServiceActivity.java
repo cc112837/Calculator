@@ -24,7 +24,7 @@ public class ServiceActivity extends Activity {
         webSettings.setBuiltInZoomControls(true);//support zoom
         webSettings.setUseWideViewPort(true);// 这个很关键
         webSettings.setLoadWithOverviewMode(true);
-        wv_show.loadUrl("http://www.yidianjiuhao.com/xfyinsi");//// TODO: 2016/7/25 (服务协议)
+        wv_show.loadUrl("http://www.yidianjiuhao.com/xfyinsi/");//// TODO: 2016/7/25 (服务协议)
         leftBtn=(ImageView) findViewById(R.id.leftBtn);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override

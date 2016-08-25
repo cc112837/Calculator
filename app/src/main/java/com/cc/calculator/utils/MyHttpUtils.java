@@ -1,6 +1,7 @@
 package com.cc.calculator.utils;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.constant.Constants;
@@ -52,6 +53,17 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord1", ((User) o).getPassWord());
             params.addBodyParameter("passWord2", ((User) o).getPhone());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
+        }
+        if(what==16){
+            params.addBodyParameter("imgUrl", ((User) o).getPassWord());
+            params.addBodyParameter("userName", ((User) o).getPhone());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
+        }
+        if(what==17){
+            params.addBodyParameter("feedback", ((User) o).getPassWord());
+            params.addBodyParameter("phone", ((User) o).getPhone());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
+
         }
 
     }
