@@ -79,9 +79,9 @@ public class PhotoUtils {
      * 创建时间：2016/3/31 22:42
      */
     public static DisplayImageOptions avatarImageOption = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.mipmap.default_icon)
-            .showImageForEmptyUri(R.mipmap.default_icon)
-            .showImageOnFail(R.mipmap.default_icon)
+            .showImageOnLoading(R.mipmap.news_icon)
+            .showImageForEmptyUri(R.mipmap.news_icon)
+            .showImageOnFail(R.mipmap.news_icon)
             .cacheInMemory(true)
             .cacheOnDisc(true)
             .displayer(new RoundedBitmapDisplayer(180))

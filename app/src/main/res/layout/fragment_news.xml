@@ -25,11 +25,6 @@
         android:background="@color/white_2"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="暂未开通，敬请期待" />
-
         <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:id="@+id/lv_showid"
             android:layout_width="match_parent"

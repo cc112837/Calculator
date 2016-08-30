@@ -1,6 +1,7 @@
 package com.cc.calculator.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,10 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cc.calculator.R;
+import com.cc.calculator.activity.NewsDatailActivity;
 import com.cc.calculator.adapter.NewsAdapter;
+import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.NewsList;
+import com.cc.calculator.utils.MyHttpUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -26,14 +32,31 @@ import java.util.List;
 public class NewsFragment extends Fragment {
     private PullToRefreshListView lv_show;
     private NewsAdapter adapter;
-    private List<String> list=new ArrayList<>();
+    String url;
+    private List<NewsList.DataEntity> list=new ArrayList<>();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View v=inflater.inflate(R.layout.fragment_news, container, false);
+        init(v);
+        return v;
+    }
+
+    private void init(View v) {
+        lv_show=(PullToRefreshListView) v.findViewById(R.id.lv_showid);
+        adapter = new NewsAdapter(getActivity(),list);
+        url= Constants.SERVER_URL+"ArticleServlet";
+        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(),NewsDatailActivity.class);
+                intent.putExtra("info",list.get(position-1).getArticleId()+"");
+                startActivity(intent);
+            }
+        });
+        MyHttpUtils.handData(handler,53,url,null);
     }
 
     private Handler handler = new Handler() {
@@ -41,17 +64,20 @@ public class NewsFragment extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 51:
-                    adapter.setList(list);
+                    MyHttpUtils.handData(handler,53,url,null);
                     adapter.notifyDataSetChanged();
                     lv_show.onRefreshComplete();
                     break;
                 case 52:
-                    adapter.setList(list);
+                    adapter.clear();
+                    MyHttpUtils.handData(handler,53,url,null);
                     adapter.notifyDataSetChanged();
                     lv_show.onRefreshComplete();
                     break;
                 case 53:
-                    adapter = new NewsAdapter(getActivity(), list);
+                    NewsList obj2 = (NewsList)msg.obj;
+                    list.addAll(obj2.getData());
+                    adapter = new NewsAdapter(getActivity(),list);
                     lv_show.setAdapter(adapter);
                     lv_show.setMode(PullToRefreshBase.Mode.BOTH);
                     lv_show.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cc.calculator.R;
+import com.cc.calculator.model.NewsList;
 import com.cc.calculator.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -28,9 +29,9 @@ import java.util.List;
 public class NewsAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<String> list;
+    private List<NewsList.DataEntity> list;
 
-    public NewsAdapter(Context context, List<String> list) {
+    public NewsAdapter(Context context, List<NewsList.DataEntity> list) {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
@@ -43,8 +44,10 @@ public class NewsAdapter extends BaseAdapter {
         }
         return 0;
     }
-
-    public void setList(List<String> list) {
+   public  void  clear(){
+       list.clear();
+   }
+    public void setList(List<NewsList.DataEntity> list) {
         this.list = list;
     }
 
@@ -60,13 +63,12 @@ public class NewsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        View view ;
         final ViewHolder vh;
         if (convertView == null) {
             vh = new ViewHolder();
             view = inflater.inflate(R.layout.news_list_item, null);
             vh.iv_photo=(ImageView) view.findViewById(R.id.iv_photo);
-            vh.tv_content=(TextView) view.findViewById(R.id.tv_content);
             vh.tv_title=(TextView) view.findViewById(R.id.tv_title);
             view.setTag(vh);
         } else {
@@ -75,16 +77,14 @@ public class NewsAdapter extends BaseAdapter {
         }
         ImageLoader
                 .getInstance()
-                .displayImage("",vh.iv_photo, PhotoUtils.avatarImageOption);
-        vh.tv_title.setText("");
-        vh.tv_content.setText("");
+                .displayImage(list.get(position).getImage(),vh.iv_photo, PhotoUtils.avatarImageOption);
+        vh.tv_title.setText(list.get(position).getTitle()+"");
         return view;
     }
 
     private class ViewHolder {
         ImageView iv_photo;
         TextView tv_title;
-        TextView tv_content;
     }
 
 }

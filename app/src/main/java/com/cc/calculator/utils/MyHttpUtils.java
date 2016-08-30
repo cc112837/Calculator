@@ -1,10 +1,11 @@
 package com.cc.calculator.utils;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.NewDetail;
+import com.cc.calculator.model.NewsList;
 import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.model.UserReg;
@@ -63,8 +64,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("feedback", ((User) o).getPassWord());
             params.addBodyParameter("phone", ((User) o).getPhone());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
-
         }
-
+        if(what==51||what==52||what==53){
+            sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new NewsList(),handler,what));
+        }
+        if(what==61){
+            params.addBodyParameter("articleId",((User)o).getPhone());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new NewDetail(), handler,what));
+        }
     }
 }
