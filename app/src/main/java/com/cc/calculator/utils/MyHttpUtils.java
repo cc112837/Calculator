@@ -1,9 +1,11 @@
 package com.cc.calculator.utils;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.cc.calculator.MyApplication;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.ImgDow;
 import com.cc.calculator.model.NewDetail;
 import com.cc.calculator.model.NewsList;
 import com.cc.calculator.model.UpdaUser;
@@ -43,8 +45,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord1", ((User) o).getPassWord());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
-        if (what == 14) {
+        if (what == 30) {
             params.addBodyParameter("phone", ((User) o).getPhone());
+            Log.e("ee",url);
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ImgDow(), handler, what));
+        }
+        if (what == 14) {
+            params.addBodyParameter("content", ((User) o).getPhone());
             params.addBodyParameter("imagePath", new File(((User) o).getPassWord()));
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
@@ -55,22 +62,22 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord2", ((User) o).getPhone());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
-        if(what==16){
+        if (what == 16) {
             params.addBodyParameter("imgUrl", ((User) o).getPassWord());
             params.addBodyParameter("userName", ((User) o).getPhone());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
-        if(what==17){
+        if (what == 17) {
             params.addBodyParameter("feedback", ((User) o).getPassWord());
             params.addBodyParameter("phone", ((User) o).getPhone());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UpdaUser(), handler, what));
         }
-        if(what==51||what==52||what==53){
-            sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new NewsList(),handler,what));
+        if (what == 51 || what == 52 || what == 53) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new NewsList(), handler, what));
         }
-        if(what==61){
-            params.addBodyParameter("articleId",((User)o).getPhone());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new NewDetail(), handler,what));
+        if (what == 61) {
+            params.addBodyParameter("articleId", ((User) o).getPhone());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new NewDetail(), handler, what));
         }
     }
 }

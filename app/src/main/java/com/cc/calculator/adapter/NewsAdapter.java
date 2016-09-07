@@ -77,7 +77,7 @@ public class NewsAdapter extends BaseAdapter {
         }
         ImageLoader
                 .getInstance()
-                .displayImage(list.get(position).getImage(),vh.iv_photo, PhotoUtils.avatarImageOption);
+                .displayImage(list.get(position).getImage(),vh.iv_photo, PhotoUtils.avatarImage);
         vh.tv_title.setText(list.get(position).getTitle()+"");
         return view;
     }

@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_margin="15dp"
             android:lines="9"
-            android:hint="您的建议和意见"
+            android:hint="您的建议和意见(请输入35个字符内)"
             android:padding="10dp"
             android:textSize="15sp"
             android:gravity="left|top"

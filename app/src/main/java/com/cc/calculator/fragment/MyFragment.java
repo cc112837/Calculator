@@ -29,6 +29,7 @@ import com.cc.calculator.activity.LoginActivity;
 import com.cc.calculator.activity.MainActivity;
 import com.cc.calculator.activity.SettingActivity;
 import com.cc.calculator.constant.Constants;
+import com.cc.calculator.model.ImgDow;
 import com.cc.calculator.model.UpdaUser;
 import com.cc.calculator.model.User;
 import com.cc.calculator.utils.CacheUtils;
@@ -51,6 +52,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     String dateTime, path;
     private TextView tv_nickname;
     private AlertDialog avatarDialog;
+    Bitmap bitmap1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,15 +71,19 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         ll_about = (LinearLayout) v.findViewById(R.id.ll_about);
         ll_record = (LinearLayout) v.findViewById(R.id.ll_record);
         tv_nickname = (TextView) v.findViewById(R.id.tv_nickname);
+        String addre = Constants.SERVER_URL + "DownloadServlet";//服务端的头像地址
+        User user = new User();
+        user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
+        MyHttpUtils.handData(handler, 30, addre, user);
         boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
                 false);
         String url = MyApplication.sharedPreferences.getString(Constants.ICON,
-               "");
+                "");
         String name = ((MainActivity) getActivity()).getName();
         if (sharelogin) {
             iv_head.setEnabled(false);
             if(url!=""){
-                ImageLoader.getInstance().displayImage(url,iv_head,PhotoUtils.avatarImageOption);
+                ImageLoader.getInstance().displayImage(url,iv_head,PhotoUtils.avatarlogin);
             }
             tv_nickname.setText("" + name);
         } else {
@@ -206,8 +212,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 if (data != null) {
                     Bundle extras = data.getExtras();
                     if (extras != null) {
-                        Bitmap bitmap = extras.getParcelable("data");
-                        path = saveToSdCard(bitmap);
+                        bitmap1 = extras.getParcelable("data");
+                        path = saveToSdCard(bitmap1);
                         String uri = Constants.SERVER_URL + "UploadServlet";//服务端的头像地址
                         User user = new User();
                         user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
@@ -241,12 +247,16 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             switch (msg.what) {
                 case 14:
                     UpdaUser user = (UpdaUser) msg.obj;
-                    if ("1".equals(user.getStatus())) {
-                        ImageLoader
-                                .getInstance()
-                                .displayImage(path, iv_head, PhotoUtils.avatarImageOption);
+                    if (user.getStatus().equals("1")) {
+                      iv_head.setImageBitmap(bitmap1);
                     } else {
                         Toast.makeText(getActivity(), user.getData(), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 30:
+                    ImgDow img=(ImgDow)msg.obj;
+                    if(img.getStatus().equals("1")){
+                        ImageLoader.getInstance().displayImage(img.getData().get(0).getImagePath(), iv_head, PhotoUtils.avatarlogin);
                     }
                     break;
             }

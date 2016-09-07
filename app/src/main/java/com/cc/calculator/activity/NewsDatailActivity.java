@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -24,7 +25,9 @@ private Handler handler=new Handler(){
         switch (msg.what){
             case 61:
                 NewDetail newDetail=(NewDetail)msg.obj;
-                wv_show.loadDataWithBaseURL(null, newDetail.getContext(), "text/html", "utf-8", null);
+                WindowManager wm = NewsDatailActivity.this.getWindowManager();
+                int width = wm.getDefaultDisplay().getWidth()-200;
+                wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px !important;}</style></head>"+newDetail.getContext(), "text/html", "utf-8", null);
                 break;
         }
     }

@@ -16,7 +16,7 @@ public class Constants {
     public final static String LOGIN_ACCOUNT = "user";
     public final static String LOGIN_PWD = "pass";
     public final static String SHARELOGIN = "sharelogin";
-    public final static String ICON = "";
-    public final static String SERVER_HOST = "117.34.80.117";
-    public final static String SERVER_URL = "http://xtt123456789.bj.cdnjsp.com.cn/servlet/";
+    public final static String ICON = "icon";
+    public final static String SERVER_HOST = "http://117.34.105.29:8209/mhealth";
+    public final static String SERVER_URL = SERVER_HOST+"/servlet/";
 }

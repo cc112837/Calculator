@@ -53,12 +53,16 @@ private Handler handler=new Handler(){
             @Override
             public void onClick(View v) {// TODO: 2016/8/16 提交用户意见
                 String advice=et_advice.getText().toString();
+                if(advice.length()<35){
                 String phone= MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, "");
                 String url=Constants.SERVER_URL+"FeedBackServlet";
                 User user=new User();
                 user.setPhone(phone);
                 user.setPassWord(advice);
-                MyHttpUtils.handData(handler,17,url,user);
+                MyHttpUtils.handData(handler,17,url,user);}
+                else{
+                    Toast.makeText(AdviceActivity.this,"请减少输入长度",Toast.LENGTH_LONG).show();
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {

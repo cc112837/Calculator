@@ -57,7 +57,19 @@ public class PhotoUtils {
         return output;
     }
 
-
+    public static DisplayImageOptions avatarImage = new DisplayImageOptions.Builder()
+            .showImageOnLoading(R.mipmap.news_icon)
+            .showImageForEmptyUri(R.mipmap.news_icon)
+            .showImageOnFail(R.mipmap.news_icon)
+            .cacheInMemory(true)
+            .cacheOnDisc(true)
+            .considerExifParams(true)
+            .imageScaleType(ImageScaleType.EXACTLY)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
+                    //.displayer(new RoundedBitmapDisplayer(20))
+                    //.displayer(new FadeInBitmapDisplayer(100))// 淡入
+            .build();
     public static DisplayImageOptions avatarlogin = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.mipmap.default_icon)
             .showImageForEmptyUri(R.mipmap.default_icon)
@@ -72,26 +84,7 @@ public class PhotoUtils {
                     //.displayer(new RoundedBitmapDisplayer(20))
                     //.displayer(new FadeInBitmapDisplayer(100))// 淡入
             .build();
-    /**
-     * 创建人：吴聪聪
-     * 设置圆角图片
-     * 邮箱:cc112837@163.com
-     * 创建时间：2016/3/31 22:42
-     */
-    public static DisplayImageOptions avatarImageOption = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.mipmap.news_icon)
-            .showImageForEmptyUri(R.mipmap.news_icon)
-            .showImageOnFail(R.mipmap.news_icon)
-            .cacheInMemory(true)
-            .cacheOnDisc(true)
-            .displayer(new RoundedBitmapDisplayer(180))
-            .considerExifParams(true)
-            .imageScaleType(ImageScaleType.EXACTLY)
-            .bitmapConfig(Bitmap.Config.RGB_565)
-            .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
-                    //.displayer(new RoundedBitmapDisplayer(20))
-                    //.displayer(new FadeInBitmapDisplayer(100))// 淡入
-            .build();
+
     private static DisplayImageOptions normalImageOptions = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.mipmap.default_icon)
             .showImageForEmptyUri(R.mipmap.default_icon)
