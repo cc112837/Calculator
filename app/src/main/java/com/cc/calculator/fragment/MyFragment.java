@@ -71,10 +71,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         ll_about = (LinearLayout) v.findViewById(R.id.ll_about);
         ll_record = (LinearLayout) v.findViewById(R.id.ll_record);
         tv_nickname = (TextView) v.findViewById(R.id.tv_nickname);
-        String addre = Constants.SERVER_URL + "DownloadServlet";//服务端的头像地址
-        User user = new User();
-        user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
-        MyHttpUtils.handData(handler, 30, addre, user);
+
         boolean sharelogin = MyApplication.sharedPreferences.getBoolean(Constants.SHARELOGIN,
                 false);
         String url = MyApplication.sharedPreferences.getString(Constants.ICON,
@@ -82,11 +79,15 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         String name = ((MainActivity) getActivity()).getName();
         if (sharelogin) {
             iv_head.setEnabled(false);
-            if(url!=""){
-                ImageLoader.getInstance().displayImage(url,iv_head,PhotoUtils.avatarlogin);
+            if (url != "") {
+                ImageLoader.getInstance().displayImage(url, iv_head, PhotoUtils.avatarlogin);
             }
             tv_nickname.setText("" + name);
         } else {
+            String addre = Constants.SERVER_URL + "DownloadServlet";//服务端的头像地址
+            User user = new User();
+            user.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
+            MyHttpUtils.handData(handler, 30, addre, user);
             iv_head.setEnabled(true);
             String maskNumber = name.substring(0, 3) + "****" + name.substring(7, name.length());
             tv_nickname.setText("" + maskNumber);
@@ -257,8 +258,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                     }
                     break;
                 case 30:
-                    ImgDow img=(ImgDow)msg.obj;
-                    if(img.getStatus().equals("1")){
+                    ImgDow img = (ImgDow) msg.obj;
+                    if (img.getStatus().equals("1")) {
                         ImageLoader.getInstance().displayImage(img.getData().get(0).getImagePath(), iv_head, PhotoUtils.avatarlogin);
                     }
                     break;
@@ -266,12 +267,12 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         }
     };
 
-    public String saveToSdCard(Bitmap bitmap){
-        String files =CacheUtils.getCacheDirectory(getActivity(), true, "icon") + dateTime+"_12";
-        File file=new File(files);
+    public String saveToSdCard(Bitmap bitmap) {
+        String files = CacheUtils.getCacheDirectory(getActivity(), true, "icon") + dateTime + "_12";
+        File file = new File(files);
         try {
-            FileOutputStream out=new FileOutputStream(file);
-            if(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)){
+            FileOutputStream out = new FileOutputStream(file);
+            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
                 out.flush();
                 out.close();
             }
