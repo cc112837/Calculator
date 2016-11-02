@@ -20,7 +20,7 @@ public class SettingActivity extends Activity {
     private ImageView back;
     private TextView tv_volume;
     private Button out;
-    private LinearLayout ll_msg, ll_updata, ll_clear;
+    private LinearLayout ll_updata, ll_clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class SettingActivity extends Activity {
         tv_volume = (TextView) findViewById(R.id.tv_volume);
         ll_clear = (LinearLayout) findViewById(R.id.ll_clear);
         ll_updata = (LinearLayout) findViewById(R.id.ll_updata);
-        ll_msg = (LinearLayout) findViewById(R.id.ll_msg);
         out = (Button) findViewById(R.id.out);
         out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,12 +49,6 @@ public class SettingActivity extends Activity {
                 intent.putExtra("set", "set");
                 setResult(-1, intent);
                 finish();
-            }
-        });
-        ll_msg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2016/8/16 新消息通知
             }
         });
         ll_clear.setOnClickListener(new View.OnClickListener() {

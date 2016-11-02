@@ -248,7 +248,10 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 case 14:
                     UpdaUser user = (UpdaUser) msg.obj;
                     if (user.getStatus().equals("1")) {
-                      iv_head.setImageBitmap(bitmap1);
+                        String addre = Constants.SERVER_URL + "DownloadServlet";//服务端的头像地址
+                        User use = new User();
+                        use.setPhone(MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT, ""));
+                        MyHttpUtils.handData(handler, 30, addre, use);
                     } else {
                         Toast.makeText(getActivity(), user.getData(), Toast.LENGTH_LONG).show();
                     }
