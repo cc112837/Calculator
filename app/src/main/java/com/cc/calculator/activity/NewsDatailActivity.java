@@ -5,8 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -25,9 +26,19 @@ private Handler handler=new Handler(){
         switch (msg.what){
             case 61:
                 NewDetail newDetail=(NewDetail)msg.obj;
-                WindowManager wm = NewsDatailActivity.this.getWindowManager();
-                int width = wm.getDefaultDisplay().getWidth()-200;
-                wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px !important;}</style></head>"+newDetail.getContext(), "text/html", "utf-8", null);
+				 WebSettings webSettings = wv_show.getSettings();
+                    webSettings.setLoadWithOverviewMode(true);
+                    webSettings.setJavaScriptEnabled(true);
+                    webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
+                    webSettings.setBuiltInZoomControls(true);
+                    webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
+                    DisplayMetrics dm = new DisplayMetrics();
+                    //取得窗口属性
+                    getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    //窗口的宽度
+                    float density = dm.density;
+                    float screenWidth = dm.widthPixels / density - 10;
+                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" + newDetail.getContext(), "text/html", "utf-8", null);
                 break;
         }
     }
