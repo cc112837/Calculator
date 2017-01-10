@@ -20,13 +20,13 @@ import com.cc.calculator.utils.MyHttpUtils;
 public class NewsDatailActivity extends Activity {
     private ImageView leftBtn;
     private WebView wv_show;
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what){
-            case 61:
-                NewDetail newDetail=(NewDetail)msg.obj;
-				 WebSettings webSettings = wv_show.getSettings();
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 61:
+                    NewDetail newDetail = (NewDetail) msg.obj;
+                    WebSettings webSettings = wv_show.getSettings();
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
                     webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
@@ -35,14 +35,15 @@ private Handler handler=new Handler(){
                     DisplayMetrics dm = new DisplayMetrics();
                     //取得窗口属性
                     getWindowManager().getDefaultDisplay().getMetrics(dm);
-                    //窗口的宽度
+                    //窗口的宽
                     float density = dm.density;
-                    float screenWidth = dm.widthPixels / density - 10;
-                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" + newDetail.getContext(), "text/html", "utf-8", null);
-                break;
+                    float width = dm.widthPixels / density - 15;
+                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + newDetail.getContext(), "text/html", "utf-8", null);
+                    break;
+            }
         }
-    }
-};
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +57,11 @@ private Handler handler=new Handler(){
                 finish();
             }
         });
-        wv_show=(WebView) findViewById(R.id.wv_show);
-        String url= Constants.SERVER_URL+"ArticleDetailServlet";
-        User user=new User();
+        wv_show = (WebView) findViewById(R.id.wv_show);
+        String url = Constants.SERVER_URL + "ArticleDetailServlet";
+        User user = new User();
         user.setPhone(info);
-        MyHttpUtils.handData(handler,61,url,user);
+        MyHttpUtils.handData(handler, 61, url, user);
 
     }
 }
