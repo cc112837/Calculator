@@ -24,7 +24,20 @@
             android:text="资讯"
             android:textColor="@color/selector_textcolor"
             android:textSize="12sp" />
-
+        <RadioButton
+            android:id="@+id/main_data"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:background="@color/white"
+            android:drawableTop="@drawable/selector_data"
+            android:gravity="center"
+            android:text="查询"
+            android:textColor="@color/selector_textcolor"
+            android:textSize="12sp" />
 
         <RadioButton
             android:id="@+id/main_home"
@@ -33,6 +46,20 @@
             android:button="@null"
             android:background="@drawable/selector_home"
             android:gravity="center"
+            android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/main_book"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:background="@color/white"
+            android:drawableTop="@drawable/selector_book"
+            android:gravity="center"
+            android:text="审视"
+            android:textColor="@color/selector_textcolor"
             android:textSize="12sp" />
 
         <RadioButton

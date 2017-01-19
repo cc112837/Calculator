@@ -26,11 +26,12 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile name: 'SMSSDK-2.0.2', ext: 'aar'
-    compile 'com.bigkoo:pickerview:2.1.0'
-    compile 'com.android.support:appcompat-v7:23.1.1'
     compile project(':onekeyshare')
+    compile project(':library')
+    compile 'com.bigkoo:pickerview:2.1.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.jiechic.library:xUtils:2.6.14'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile project(':library')
+    compile 'com.android.support:support-v4:23.4.0'
 }

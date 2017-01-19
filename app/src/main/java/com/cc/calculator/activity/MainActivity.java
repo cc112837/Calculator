@@ -15,7 +15,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.cc.calculator.R;
+import com.cc.calculator.fragment.BookFragment;
 import com.cc.calculator.fragment.ChangeFragmentHelper;
+import com.cc.calculator.fragment.DataFragment;
 import com.cc.calculator.fragment.HomeFragment;
 import com.cc.calculator.fragment.MyFragment;
 import com.cc.calculator.fragment.NewsFragment;
@@ -103,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.main_home:
                         fragment=new HomeFragment();
+                        break;
+                    case  R.id.main_book:
+                        fragment=new BookFragment();
+                        break;
+                    case R.id.main_data:
+                        fragment=new DataFragment();
                         break;
                     case R.id.main_my:
                         fragment=new MyFragment();
