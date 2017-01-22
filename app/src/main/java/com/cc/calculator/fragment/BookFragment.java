@@ -3,23 +3,16 @@ package com.cc.calculator.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cc.calculator.R;
 import com.cc.calculator.activity.BookDetailActivity;
 import com.cc.calculator.adapter.BookAdapter;
-import com.cc.calculator.constant.Constants;
-import com.cc.calculator.model.BookDetail;
-import com.cc.calculator.model.User;
-import com.cc.calculator.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,25 +22,7 @@ import java.util.List;
  */
 public class BookFragment extends Fragment {
     private ListView lv_book;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 62:
-                    BookDetail bookDetail=(BookDetail) msg.obj;
-                    if(bookDetail.getStatus().equals("1")){
-                        Intent intent=new Intent(getActivity(), BookDetailActivity.class);
-                        intent.putExtra("book",bookDetail.getDataDetails()+"");
-                        startActivity(intent);
-                    }
-                    else {
-                        Toast.makeText(getActivity(),bookDetail.getData(),Toast.LENGTH_LONG).show();
-                    }
-                break;
-            }
-        }
-    };
+
 
 
 
@@ -84,10 +59,10 @@ public class BookFragment extends Fragment {
         lv_book.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String url= Constants.SERVER_URL+"FireDataServlet";
-                User user=new User();
-                user.setPhone(position+"");
-                MyHttpUtils.handData(handler,62,url,user);
+                Intent intent=new Intent(getActivity(), BookDetailActivity.class);
+                intent.putExtra("book",position+"");
+                startActivity(intent);
+
             }
         });
     }

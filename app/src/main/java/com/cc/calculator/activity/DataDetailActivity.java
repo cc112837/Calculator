@@ -17,10 +17,11 @@ import com.cc.calculator.model.BookDetail;
 import com.cc.calculator.model.User;
 import com.cc.calculator.utils.MyHttpUtils;
 
-public class BookDetailActivity extends AppCompatActivity {
-    private WebView wb_show;
+public class DataDetailActivity extends AppCompatActivity {
     private ImageView leftBtn;
-    private String book;
+    private String id;
+
+    private WebView wb_show;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -41,7 +42,7 @@ public class BookDetailActivity extends AppCompatActivity {
                         wb_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + bookDetail.getDataDetails(), "text/html", "utf-8", null);
                     }
                     else {
-                        Toast.makeText(BookDetailActivity.this,bookDetail.getData(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DataDetailActivity.this,bookDetail.getData(),Toast.LENGTH_LONG).show();
                     }
                     break;
             }
@@ -51,17 +52,13 @@ public class BookDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_detail);
-        init();
-    }
-
-    private void init() {
+        setContentView(R.layout.activity_data_detail);
+        id = getIntent().getStringExtra("id");
         wb_show=(WebView) findViewById(R.id.wb_show);
         leftBtn=(ImageView) findViewById(R.id.leftBtn);
-        book = getIntent().getStringExtra("book");
-        String url= Constants.SERVER_URL+"FireDataServlet";
+        String url= Constants.SERVER_URL+"FireDispostionServlet";
         User user=new User();
-        user.setPhone(book+"");
+        user.setPhone(id+"");
         MyHttpUtils.handData(handler,62,url,user);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
