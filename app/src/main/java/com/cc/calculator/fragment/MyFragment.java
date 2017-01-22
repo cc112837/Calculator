@@ -312,13 +312,13 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         OnekeyShare oks = new OnekeyShare();
         oks.disableSSOWhenAuthorize();
         oks.setTitle("灭火助手");
-        oks.setTitleUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
-        oks.setText("灭火助手");
+        oks.setTitleUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.cc.calculator");
+        oks.setText("《灭火助手》旨在提供最专业的消防指挥参考数据");
         oks.setImageUrl("http://img.wdjimg.com/mms/icon/v1/e/ff/2a699806f4202b232e3d8a0c08ecaffe_96_96.png");//
-        oks.setUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
+        oks.setUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.cc.calculator");
         oks.setComment("灭火助手");
         oks.setSite(getString(R.string.app_name));
-        oks.setSiteUrl("http://www.wandoujia.com/apps/com.cc.calculator/download");
+        oks.setSiteUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.cc.calculator");
         oks.show(getContext());
     }
 }
