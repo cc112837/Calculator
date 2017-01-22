@@ -34,6 +34,7 @@ import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 
 public class LoginActivity extends Activity implements TextWatcher, PlatformActionListener {
@@ -42,7 +43,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
     private EditText nameText, pwdText;
     private TextView regButton, forgetButton;
     private String name, pwd;
-    private ImageView iv_qqlogin, iv_weibologin;
+    private ImageView iv_qqlogin, iv_weibologin,iv_wechatlogin;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR = 3;
     private static final int MSG_AUTH_COMPLETE = 4;
@@ -53,7 +54,7 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ShareSDK.initSDK(LoginActivity.this);
-
+        iv_wechatlogin=(ImageView) findViewById(R.id.iv_wechatlogin);
         iv_qqlogin = (ImageView) findViewById(R.id.iv_qqlogin);
         iv_weibologin = (ImageView) findViewById(R.id.iv_weibologin);
         nameText = (EditText) findViewById(R.id.nameText);
@@ -90,7 +91,6 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         iv_qqlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/3/22
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
                 if (qq.isValid()) {
                     qq.removeAccount();
@@ -99,6 +99,19 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                 qq.setPlatformActionListener(LoginActivity.this); // 设置分享事件回调
                 qq.showUser(null);
                 qq.authorize();
+            }
+        });
+        iv_wechatlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
+                if (wechat.isValid()) {
+                    wechat.removeAccount();
+                }
+                wechat.SSOSetting(false);  //设置false表示使用SSO授权方式
+                wechat.setPlatformActionListener(LoginActivity.this); // 设置分享事件回调
+                wechat.showUser(null);
+                wechat.authorize();
             }
         });
         iv_weibologin.setOnClickListener(new View.OnClickListener() {
@@ -231,43 +244,14 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
                     finish();
                     Object[] objs = (Object[]) msg.obj;
                     String platform = (String) objs[0];
-                    HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
                     final PlatformDb plat = (PlatformDb) objs[2];
                     if (QQ.NAME.equals(platform)) {
-                        final String nickname = res.get("nickname").toString();
-                        final String icon = res.get("figureurl_qq_2").toString();
-                        MyAndroidUtil.editXmlByString(
-                                Constants.LOGIN_ACCOUNT, nickname);
-                        MyAndroidUtil.editXml(
-                                Constants.SHARELOGIN, true);
-                        MyAndroidUtil.editXmlByString(
-                                Constants.ICON, icon);
-                        name = nickname;
-                        String url = Constants.SERVER_URL + "CalculatorUserOtherLoginServlet";
-                        User user = new User();
-                        user.setPhone(nickname);
-                        user.setPassWord(icon);
-                        MyHttpUtils.handData(handler, 16, url, user);
+                        authThrid(plat.getUserName(), plat.getUserIcon());
+                    } else if (SinaWeibo.NAME.equals(platform)) {
+                        authThrid(plat.getUserName(), plat.getUserIcon());
+                    } else if (Wechat.NAME.equals(platform)) {
+                        authThrid(plat.getUserName(), plat.getUserIcon());
                     }
-
-                    if (SinaWeibo.NAME.equals(platform)) {
-                        final String nickname = res.get("name").toString();
-                        final String icon = res.get("avatar_hd").toString();
-                        MyAndroidUtil.editXmlByString(
-                                Constants.LOGIN_ACCOUNT, nickname);
-                        MyAndroidUtil.editXml(
-                                Constants.SHARELOGIN, true);
-                        MyAndroidUtil.editXmlByString(
-                                Constants.ICON, icon);
-                        name = nickname;
-                        String url = Constants.SERVER_URL + "CalculatorUserOtherLoginServlet";
-                        User user = new User();
-                        user.setPhone(nickname);
-                        user.setPassWord(icon);
-                        MyHttpUtils.handData(handler, 16, url, user);
-                    }
-
-
                 }
                 break;
 
@@ -277,6 +261,21 @@ public class LoginActivity extends Activity implements TextWatcher, PlatformActi
         }
 
     };
+
+    private void authThrid(String userName, String userIcon) {
+        MyAndroidUtil.editXmlByString(
+                Constants.LOGIN_ACCOUNT, userName);
+        MyAndroidUtil.editXml(
+                Constants.SHARELOGIN, true);
+        MyAndroidUtil.editXmlByString(
+                Constants.ICON, userIcon);
+        name = userName;
+        String url = Constants.SERVER_URL + "CalculatorUserOtherLoginServlet";
+        User user = new User();
+        user.setPhone(userName);
+        user.setPassWord(userIcon);
+        MyHttpUtils.handData(handler, 16, url, user);
+    }
 
     Thread thread = new Thread(new Runnable() {
         @Override

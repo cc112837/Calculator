@@ -35,7 +35,7 @@
             android:background="@color/white"
             android:drawableTop="@drawable/selector_data"
             android:gravity="center"
-            android:text="查询"
+            android:text="处置"
             android:textColor="@color/selector_textcolor"
             android:textSize="12sp" />
 
@@ -58,7 +58,7 @@
             android:background="@color/white"
             android:drawableTop="@drawable/selector_book"
             android:gravity="center"
-            android:text="审视"
+            android:text="资料"
             android:textColor="@color/selector_textcolor"
             android:textSize="12sp" />
 
