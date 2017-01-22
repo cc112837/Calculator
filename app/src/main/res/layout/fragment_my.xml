@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white_2"
-    tools:context="com.cc.tabmiddle.MyFragment">
+    tools:context="com.cc.calculator.fragment.MyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

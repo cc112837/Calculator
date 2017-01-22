@@ -94,7 +94,8 @@
         <activity
             android:name=".activity.UpdataPwdActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.NewsDatailActivity"></activity>
+        <activity android:name=".activity.NewsDatailActivity" />
+        <activity android:name=".activity.BookDetailActivity"></activity>
     </application>
 
 </manifest>

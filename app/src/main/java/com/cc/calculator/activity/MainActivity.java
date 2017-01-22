@@ -107,9 +107,11 @@ public class MainActivity extends AppCompatActivity {
                         fragment=new HomeFragment();
                         break;
                     case  R.id.main_book:
+                        //资料页面
                         fragment=new BookFragment();
                         break;
                     case R.id.main_data:
+                        //处置程序
                         fragment=new DataFragment();
                         break;
                     case R.id.main_my:

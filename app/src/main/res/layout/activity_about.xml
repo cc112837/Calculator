@@ -6,7 +6,7 @@
     android:background="@color/buttoncolor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.wzy.mhealth.AboutActivity">
+    tools:context="com.cc.calculator.activity.AboutActivity">
 
     <RelativeLayout
         android:id="@+id/title1"
