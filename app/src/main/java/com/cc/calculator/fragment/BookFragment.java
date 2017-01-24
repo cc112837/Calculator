@@ -37,14 +37,14 @@ public class BookFragment extends Fragment {
     private void init(View v) {
         lv_book=(ListView) v.findViewById(R.id.lv_book);
         List<Integer> Image_people = new ArrayList<Integer>();
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
-        Image_people.add(R.mipmap.shezhi);
+        Image_people.add(R.mipmap.dangrous);
+        Image_people.add(R.mipmap.easy_fire);
+        Image_people.add(R.mipmap.fire_dismiss);
+        Image_people.add(R.mipmap.individual);
+        Image_people.add(R.mipmap.pour);
+        Image_people.add(R.mipmap.pool);
+        Image_people.add(R.mipmap.car_struct);
+        Image_people.add(R.mipmap.aid_phone);
         List<String> itemTitles = new ArrayList<>();
         itemTitles.add("危险化学品处置要点");
         itemTitles.add("常见遇水易燃物质");

@@ -49,8 +49,8 @@ public class DataFragment extends Fragment {
         String s = MyUtils.readFromRaw(getActivity(), R.raw.itemdata);
 
 
-        int[] image = new int[]{R.mipmap.shezhi,
-                R.mipmap.shezhi, R.mipmap.shezhi, R.mipmap.shezhi,R.mipmap.shezhi,R.mipmap.shezhi,R.mipmap.shezhi,R.mipmap.shezhi};
+        int[] image = new int[]{R.mipmap.first,
+                R.mipmap.two, R.mipmap.three, R.mipmap.four,R.mipmap.five,R.mipmap.six,R.mipmap.seven,R.mipmap.eight};
         try {
             JSONArray jsonObject = new JSONArray(s);
             for (int i=0;i<jsonObject.length();i++){
